@@ -50,6 +50,11 @@
           opacity: 0;
           transition: 0.2s;
         }
+
+        .setting-info.above {
+          top: -20px;
+        }
+
       }
 
       .setting.help {
@@ -75,6 +80,10 @@
           li, p {
             padding: 5px;
           }
+
+          li.dropdown-title {
+            padding: 0;
+          }
         }
       }
 
@@ -82,14 +91,24 @@
       .setting:hover .setting-icon {
         opacity: 1;
       }
+
       .setting:hover .setting-info {
         // display: block;
         visibility: visible;
         opacity: 1;
       }
+
       .setting.setup:hover .setting-icon {
         transform: rotate(90deg);
       }
+
+      .setting.active {
+        .setting-icon, .setting-info {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+
     }
 
   }

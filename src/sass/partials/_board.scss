@@ -1,8 +1,6 @@
 
 .visualizer-container {
-
   .visualizer {
-
     .board-container {
       height: calc(100% - 70px);
       width: 100%;
@@ -14,8 +12,7 @@
       .board {
         display: flex;
         flex-direction: column;
-        border-top: 1px solid black;
-        border-left: 1px solid black;
+        border: 0.5px solid black;
 
         .row {
           display: flex;
@@ -24,8 +21,35 @@
             box-sizing: border-box;
             height: 24px;
             width: 24px;
-            border-right: 1px solid black;
-            border-bottom: 1px solid black;
+            border: 0.5px solid black;
+            position: relative;
+          }
+
+          .cell.wall::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: red;
+            top: 0;
+            left: 0;
+            animation: makeWall 0.3s;
+          }
+
+          @keyframes makeWall {
+            0% {
+              transform: scale(0.1);
+              border-radius: 50%;
+            }
+
+            70% {
+              transform: scale(1.3);
+              border-radius: 2px;
+            }
+
+            100% {
+              transform: scale(1);
+            }
           }
         }
       }

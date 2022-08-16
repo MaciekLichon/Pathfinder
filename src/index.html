@@ -43,11 +43,11 @@
               <div class="dropdown-button">
                 <i class="fas fa-cog setting-icon"></i>
                 <ul class="dropdown-content">
-                  <p>Board size</p>
-                  <li><a href="" class="board-size-selector" data-rows=30 data-columns=50>Big</a></li>
-                  <li><a href="" class="board-size-selector" data-rows=20 data-columns=35>Medium</a></li>
-                  <li><a href="" class="board-size-selector" data-rows=10 data-columns=10>Small</a></li>
-                  <p>Color theme</p>
+                  <li class="dropdown-title"><p>Board size</p></li>
+                  <li><a href="" class="board-size-selector" data-rows="30" data-columns="50">Big</a></li>
+                  <li><a href="" class="board-size-selector" data-rows="20" data-columns="35">Medium</a></li>
+                  <li><a href="" class="board-size-selector" data-rows="10" data-columns="10">Small</a></li>
+                  <li class="dropdown-title"><p>Board size</p></li>
                   <li>Blue</li>
                   <li>Green</li>
                   <li>Yellow</li>
@@ -56,23 +56,23 @@
               </div>
             </div>
             <div class="board-settings">
-              <div class="setting start">
+              <div class="setting start" action="setStart">
                 <i class="fas fa-map-marker-alt setting-icon"></i>
                 <p class="setting-info">Select start position</p>
               </div>
-              <div class="setting new-destination">
+              <div class="setting mid-destination" action="setMidPoint">
                 <i class="fas fa-map-pin setting-icon"></i>
-                <p class="setting-info">Add another position mid-way</p>
+                <p class="setting-info above">Add another position mid-way</p>
               </div>
-              <div class="setting finish">
+              <div class="setting finish" action="setEnd">
                 <i class="fas fa-flag-checkered setting-icon"></i>
                 <p class="setting-info">Select end position</p>
               </div>
-              <div class="setting walls">
+              <div class="setting walls" action="drawWalls">
                 <i class="fas fa-cubes setting-icon"></i>
-                <p class="setting-info">Add walls</p>
+                <p class="setting-info above">Add walls</p>
               </div>
-              <div class="setting ereaser">
+              <div class="setting ereaser" action="ereaseWalls">
                 <i class="fas fa-eraser setting-icon"></i>
                 <p class="setting-info">Clear walls</p>
               </div>

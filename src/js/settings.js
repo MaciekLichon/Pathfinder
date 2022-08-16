@@ -9,10 +9,16 @@ export const select = {
   containerOf: {
     visualizer: '.visualizer',
     board: '.board',
-    settings: '.settings-container',
+    allActions: '.settings-container',
+    drawingActions: '.board-settings',
   },
-  setters: {
+  action: {
     boardSize: '.board-size-selector',
+    walls: '.setting.walls',
+    startPos: '.setting.start',
+    midPos: '.setting.mid-destination',
+    endPos: '.setting.finish',
+    ereaser: '.setting.ereaser',
   }
 };
 
@@ -20,5 +26,12 @@ export const classNames = {
   board: {
     row: 'row',
     cell: 'cell',
+    wall: 'wall',
+  },
+  actions: {
+    setting: 'setting',
+  },
+  state: {
+    active: 'active',
   }
 };
