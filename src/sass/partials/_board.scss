@@ -1,0 +1,35 @@
+
+.visualizer-container {
+
+  .visualizer {
+
+    .board-container {
+      height: calc(100% - 70px);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      .board {
+        display: flex;
+        flex-direction: column;
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+
+        .row {
+          display: flex;
+
+          .cell {
+            box-sizing: border-box;
+            height: 24px;
+            width: 24px;
+            border-right: 1px solid black;
+            border-bottom: 1px solid black;
+          }
+        }
+      }
+    }
+
+  }
+}

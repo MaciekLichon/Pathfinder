@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <header class="header">
+        <div class="nav">
+          <div class="nav-options">
+            <div class="dropdown-button nav-elem">
+              <span>Algorithms</span>
+              <ul class="dropdown-content">
+                <li>Algo 1</li>
+                <li>Algo 2</li>
+                <li>Algo 3</li>
+              </ul>
+            </div>
+            <a href="" class="nav-elem">Add maze</a>
+            <a href="" class="nav-elem">Clear board</a>
+            <a href="" class="nav-elem">Visualize</a>
+          </div>
+          <div class="logo">
+            <p class="title">Pathfinder</p>
+            <i class="fas fa-location-arrow"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="visualizer-container">
+        <div class="visualizer">
+          <div class="settings-container">
+            <div class="setting setup">
+              <div class="dropdown-button">
+                <i class="fas fa-cog setting-icon"></i>
+                <ul class="dropdown-content">
+                  <p>Board size</p>
+                  <li><a href="" class="board-size-selector" data-rows=30 data-columns=50>Big</a></li>
+                  <li><a href="" class="board-size-selector" data-rows=20 data-columns=35>Medium</a></li>
+                  <li><a href="" class="board-size-selector" data-rows=10 data-columns=10>Small</a></li>
+                  <p>Color theme</p>
+                  <li>Blue</li>
+                  <li>Green</li>
+                  <li>Yellow</li>
+                </ul>
+                <p class="setting-info dropdown-button">Board settings</p>
+              </div>
+            </div>
+            <div class="board-settings">
+              <div class="setting start">
+                <i class="fas fa-map-marker-alt setting-icon"></i>
+                <p class="setting-info">Select start position</p>
+              </div>
+              <div class="setting new-destination">
+                <i class="fas fa-map-pin setting-icon"></i>
+                <p class="setting-info">Add another position mid-way</p>
+              </div>
+              <div class="setting finish">
+                <i class="fas fa-flag-checkered setting-icon"></i>
+                <p class="setting-info">Select end position</p>
+              </div>
+              <div class="setting walls">
+                <i class="fas fa-cubes setting-icon"></i>
+                <p class="setting-info">Add walls</p>
+              </div>
+              <div class="setting ereaser">
+                <i class="fas fa-eraser setting-icon"></i>
+                <p class="setting-info">Clear walls</p>
+              </div>
+            </div>
+            <div class="setting help">
+              <i class="fas fa-info-circle setting-icon"></i>
+              <p class="setting-info">Help</p>
+            </div>
+          </div>
+          <div class="board-container">
+            <div class="board">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <script src="js/app.js" type="module"></script>
+  </body>
+</html>

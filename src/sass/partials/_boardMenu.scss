@@ -1,0 +1,96 @@
+
+.visualizer-container {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+
+  .visualizer {
+    background: $board-color;
+    width: 100%;
+    height: 90%;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+
+    .settings-container {
+      height: 70px;
+      width: 100%;
+      background: $settings-color;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .board-settings {
+        display: flex;
+        gap: 50px;
+      }
+
+      .setting, .setting.help {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .setting-icon {
+          font-size: $font-size-settings-icon;
+          opacity: 0.4;
+          transition: 0.2s;
+        }
+
+        .setting-info {
+          font-size: $font-size-settings-info;
+          position: absolute;
+          margin: 0;
+          white-space: nowrap;
+          top: 27px;
+          // display: none;
+          visibility: hidden;
+          opacity: 0;
+          transition: 0.2s;
+        }
+      }
+
+      .setting.help {
+        margin: 0 50px;
+      }
+
+      .setting.setup {
+        margin: 0 50px;
+
+        .setting-info {
+          top: 50%;
+          left: 100%;
+          padding: 5px;
+          transform: translateY(-50%);
+          visibility: visible;
+          opacity: 0.4;
+        }
+
+        .dropdown-content {
+          min-width: 500%;
+          font-size: $font-size-settings-info;
+
+          li, p {
+            padding: 5px;
+          }
+        }
+      }
+
+
+      .setting:hover .setting-icon {
+        opacity: 1;
+      }
+      .setting:hover .setting-info {
+        // display: block;
+        visibility: visible;
+        opacity: 1;
+      }
+      .setting.setup:hover .setting-icon {
+        transform: rotate(90deg);
+      }
+    }
+
+  }
+}

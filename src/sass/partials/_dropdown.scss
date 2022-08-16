@@ -1,0 +1,46 @@
+.dropdown-button {
+  position: relative;
+
+  .dropdown-content {
+    left: 0;
+    top: 100%;
+    position: absolute;
+    background: $dropdown-color;
+    list-style: none;
+    min-width: 100%;
+    margin: 0;
+    padding: 0;
+    transform: scale(1,0);
+    transition: 0.3s;
+    transition-delay: 0s;
+    transform-origin: top;
+    z-index: 10;
+    border-radius: 0 0 5px 5px;
+    overflow: hidden;
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      margin: 0;
+      padding: 10px;
+      text-align: left;
+      background: $dropdown-color-section;
+    }
+
+    li {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    li:hover {
+      background: $dropdown-hover-color;
+    }
+  }
+}
+
+.dropdown-button:hover .dropdown-content {
+  transform: scale(1,1);
+  transition-delay: 0.3s;
+}
