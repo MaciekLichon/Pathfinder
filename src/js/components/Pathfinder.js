@@ -24,6 +24,10 @@ class Pathfinder {
 
     thisPathfinder.dom.boardSizeSetters = thisPathfinder.dom.actionsBar.querySelectorAll(select.action.boardSize);
     thisPathfinder.dom.drawingActions = thisPathfinder.dom.actionsBar.querySelector(select.containerOf.drawingActions);
+
+    thisPathfinder.dom.startPos = thisPathfinder.dom.board.querySelector(select.node.start);
+    thisPathfinder.dom.finishPos = thisPathfinder.dom.board.querySelector(select.node.finish);
+
     // thisPathfinder.dom.startPos = thisPathfinder.dom.actionsBar.querySelector(select.action.startPos);
     // thisPathfinder.dom.midPos = thisPathfinder.dom.actionsBar.querySelector(select.action.midPos);
     // thisPathfinder.dom.endPos = thisPathfinder.dom.actionsBar.querySelector(select.action.endPos);
@@ -138,27 +142,27 @@ class Pathfinder {
     const defaultRow = settings.startPos.defaultRow;
     const defaultColumn = settings.startPos.defaultColumn;
     const defaultStartCell = thisPathfinder.dom.board.querySelector(`[row="${defaultRow}"][column="${defaultColumn}"]`);
-    defaultStartCell.classList.add(classNames.board.startPos);
 
-    console.log(defaultStartCell);
+    if (!thisPathfinder.dom.startPos) {
+      defaultStartCell.classList.add(classNames.board.startPos);
+    }
 
     let startPosQueue = [ defaultStartCell ];
 
     thisPathfinder.dom.board.addEventListener('mouseover', function(event) {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setStart') {
         const hoveredCell = event.target;
+
         startPosQueue.push(hoveredCell);
         startPosQueue[0].classList.remove(classNames.board.startPos);
         startPosQueue.shift();
+
         hoveredCell.classList.add(classNames.board.startPos);
+        thisPathfinder.dom.startPos = hoveredCell;
+
+        console.log(thisPathfinder.dom.startPos);
       }
     });
-  }
-
-  setMidPoint() {
-    const thisPathfinder = this;
-
-    console.log('setMidPoint');
   }
 
   setFinish() {
@@ -167,21 +171,33 @@ class Pathfinder {
     const defaultRow = settings.finishPos.defaultRow;
     const defaultColumn = settings.finishPos.defaultColumn;
     const defaultFinishCell = thisPathfinder.dom.board.querySelector(`[row="${defaultRow}"][column="${defaultColumn}"]`);
-    defaultFinishCell.classList.add(classNames.board.finishPos);
 
-    console.log(defaultFinishCell);
+    if (!thisPathfinder.dom.finishPos) {
+      defaultFinishCell.classList.add(classNames.board.finishPos);
+    }
 
     let finishPosQueue = [ defaultFinishCell ];
 
     thisPathfinder.dom.board.addEventListener('mouseover', function(event) {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setFinish') {
         const hoveredCell = event.target;
+
         finishPosQueue.push(hoveredCell);
         finishPosQueue[0].classList.remove(classNames.board.finishPos);
         finishPosQueue.shift();
+
         hoveredCell.classList.add(classNames.board.finishPos);
+        thisPathfinder.dom.finishPos = hoveredCell;
+
+        console.log(thisPathfinder.dom.finishPos);
       }
     });
+  }
+
+  setMidPoint() {
+    // const thisPathfinder = this;
+
+    console.log('setMidPoint');
   }
 
   drawWalls() {
