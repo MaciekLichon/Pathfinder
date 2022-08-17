@@ -20,6 +20,7 @@
 
     a {
       text-decoration: none;
+      width: 100%;
     }
 
     p {
@@ -30,13 +31,20 @@
     }
 
     li {
-      padding: 10px;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a {
+        padding: 5px;
+      }
     }
 
     li.dropdown-title {
       padding: 0;
       cursor: auto;
+      display: block;
     }
 
     li:hover {

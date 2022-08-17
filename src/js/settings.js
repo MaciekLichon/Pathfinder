@@ -3,6 +3,14 @@ export const settings = {
     defaultRows: 20,
     defaultColumns: 35,
   },
+  startPos: {
+    defaultRow: 10,
+    defaultColumn: 10,
+  },
+  finishPos: {
+    defaultRow: 10,
+    defaultColumn: 25,
+  }
 };
 
 export const select = {
@@ -27,6 +35,8 @@ export const classNames = {
     row: 'row',
     cell: 'cell',
     wall: 'wall',
+    startPos: 'startPos',
+    finishPos: 'finishPos',
   },
   actions: {
     setting: 'setting',
