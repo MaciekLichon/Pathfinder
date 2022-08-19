@@ -229,12 +229,16 @@ class Pathfinder {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setStart') {
         const hoveredCell = event.target;
 
-        startPosQueue.push(hoveredCell);
-        startPosQueue[0].classList.remove(classNames.board.startPos);
-        startPosQueue.shift();
+        if (hoveredCell.classList.contains(classNames.board.cell)) {
+          startPosQueue.push(hoveredCell);
+          startPosQueue[0].classList.remove(classNames.board.startPos);
+          startPosQueue.shift();
 
-        hoveredCell.classList.add(classNames.board.startPos);
-        thisPathfinder.dom.startPos = hoveredCell;
+          hoveredCell.classList.add(classNames.board.startPos);
+          thisPathfinder.dom.startPos = hoveredCell;
+        } else {
+          thisPathfinder.holdingMouse = false;
+        }
       }
     });
 
@@ -258,12 +262,16 @@ class Pathfinder {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setFinish') {
         const hoveredCell = event.target;
 
-        finishPosQueue.push(hoveredCell);
-        finishPosQueue[0].classList.remove(classNames.board.finishPos);
-        finishPosQueue.shift();
+        if (hoveredCell.classList.contains(classNames.board.cell)) {
+          finishPosQueue.push(hoveredCell);
+          finishPosQueue[0].classList.remove(classNames.board.finishPos);
+          finishPosQueue.shift();
 
-        hoveredCell.classList.add(classNames.board.finishPos);
-        thisPathfinder.dom.finishPos = hoveredCell;
+          hoveredCell.classList.add(classNames.board.finishPos);
+          thisPathfinder.dom.finishPos = hoveredCell;
+        } else {
+          thisPathfinder.holdingMouse = false;
+        }
       }
     });
 
@@ -281,10 +289,15 @@ class Pathfinder {
     thisPathfinder.dom.board.addEventListener('mouseover', function(event) {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'drawWalls') {
         const hoveredCell = event.target;
-        hoveredCell.classList.add(classNames.board.wall);
 
-        if (!thisPathfinder.walls.includes(hoveredCell)) {
-          thisPathfinder.walls.push(hoveredCell);
+        if (hoveredCell.classList.contains(classNames.board.cell)) {
+          hoveredCell.classList.add(classNames.board.wall);
+
+          if (!thisPathfinder.walls.includes(hoveredCell)) {
+            thisPathfinder.walls.push(hoveredCell);
+          }
+        } else {
+          thisPathfinder.holdingMouse = false;
         }
       }
     });
