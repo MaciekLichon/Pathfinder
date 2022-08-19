@@ -1,13 +1,27 @@
 $background-color: lightblue;
-$dropdown-color: lightpink;
-$dropdown-hover-color: pink;
-$dropdown-color-section: #ff6a80;
+$dropdown-color: lightgrey;
+$dropdown-hover-color: darkgrey;
+$dropdown-color-section: grey;
 $board-color: white;
 $settings-color: #f5f5f5;
 $info-box-color: black;
+$borders-color: black;
+
+// themes
+$theme-color-teal: #abd5c0;
+$theme-color-teal-wall: #779586;
+
+$theme-color-tan: #dfcd9f;
+$theme-color-tan-wall: #9c8f6f;
+
+
+$theme-color-lavender: #bcbcf2;
+$theme-color-lavender-wall: #8383a9;
+
 
 body {
-  background: $background-color;
+  background: $theme-color-teal;
+  transition: 0.5s;
 }
 
 .container {

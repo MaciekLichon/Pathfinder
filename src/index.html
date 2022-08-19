@@ -26,7 +26,7 @@
               </ul>
             </div>
             <a href="" class="nav-elem">Add maze</a>
-            <a href="" class="nav-elem">Clear board</a>
+            <a href="" class="nav-elem" action="clear">Clear board</a>
             <a href="" class="nav-elem">Visualize</a>
           </div>
           <div class="logo">
@@ -45,12 +45,12 @@
                 <ul class="dropdown-content">
                   <li class="dropdown-title"><p>Board size</p></li>
                   <li><a href="" class="board-size-selector" data-rows="30" data-columns="50">Big</a></li>
-                  <li><a href="" class="board-size-selector" data-rows="20" data-columns="35">Medium</a></li>
-                  <li><a href="" class="board-size-selector" data-rows="10" data-columns="10">Small</a></li>
+                  <li><a href="" class="board-size-selector sizeSelected" data-rows="20" data-columns="35">Medium</a></li>
+                  <li><a href="" class="board-size-selector" data-rows="10" data-columns="25">Small</a></li>
                   <li class="dropdown-title"><p>Color theme</p></li>
-                  <li>Blue</li>
-                  <li>Green</li>
-                  <li>Yellow</li>
+                  <li><a href="" class="theme-selector themeSelected" data-theme="teal" body-color="#abd5c0">Teal</a></li>
+                  <li><a href="" class="theme-selector" data-theme="tan" body-color="#dfcd9f">Tan</a></li>
+                  <li><a href="" class="theme-selector" data-theme="lavender" body-color="#bcbcf2">Lavender</a></li>
                 </ul>
                 <p class="setting-info dropdown-button">Board settings</p>
               </div>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="board-container">
-            <div class="board">
+            <div class="board blue">
 
             </div>
           </div>

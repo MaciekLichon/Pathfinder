@@ -12,7 +12,7 @@
       .board {
         display: flex;
         flex-direction: column;
-        border: 0.5px solid black;
+        border: 0.5px solid $borders-color;
 
         .row {
           display: flex;
@@ -21,7 +21,7 @@
             box-sizing: border-box;
             height: 24px;
             width: 24px;
-            border: 0.5px solid black;
+            border: 0.5px solid $borders-color;
             position: relative;
           }
 
@@ -63,6 +63,44 @@
             background-repeat: no-repeat;
             background-position: center;
           }
+        }
+      }
+
+      // Themes
+
+      .board.blue {
+        border-color: $theme-color-teal;
+
+        .cell {
+          border-color: $theme-color-teal;
+        }
+
+        .cell.wall::after {
+          background: $theme-color-teal-wall;
+        }
+      }
+
+      .board.tan {
+        border-color: $theme-color-tan;
+
+        .cell {
+          border-color: $theme-color-tan;
+        }
+
+        .cell.wall::after {
+          background: $theme-color-tan-wall;
+        }
+      }
+
+      .board.lavender {
+        border-color: $theme-color-lavender;
+
+        .cell {
+          border-color: $theme-color-lavender;
+        }
+
+        .cell.wall::after {
+          background: $theme-color-lavender-wall;
         }
       }
     }

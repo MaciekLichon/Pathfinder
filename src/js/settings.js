@@ -4,12 +4,12 @@ export const settings = {
     defaultColumns: 35,
   },
   startPos: {
-    defaultRow: 10,
-    defaultColumn: 10,
+    defaultRow: 1,
+    defaultColumn: 1,
   },
   finishPos: {
-    defaultRow: 10,
-    defaultColumn: 25,
+    defaultRow: 1,
+    defaultColumn: 2,
   }
 };
 
@@ -19,9 +19,14 @@ export const select = {
     board: '.board',
     allActions: '.settings-container',
     drawingActions: '.board-settings',
+    header: '.header',
+  },
+  header: {
+    clearBoard: '[action=clear]',
   },
   action: {
     boardSize: '.board-size-selector',
+    theme: '.theme-selector',
     walls: '.setting.walls',
     startPos: '.setting.start',
     midPos: '.setting.mid-destination',
@@ -31,6 +36,10 @@ export const select = {
   node: {
     start: '.start-pos',
     finish: '.finish-pos',
+  },
+  setter: {
+    sizeSelected: '.sizeSelected',
+    themeSelected: '.themeSelected',
   }
 };
 
@@ -47,5 +56,7 @@ export const classNames = {
   },
   state: {
     active: 'active',
+    sizeSelected: 'sizeSelected',
+    themeSelected: 'themeSelected',
   }
 };
