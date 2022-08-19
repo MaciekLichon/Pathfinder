@@ -182,7 +182,7 @@ class Pathfinder {
     }
     thisPathfinder.setStart();
     thisPathfinder.setFinish();
-    console.log(thisPathfinder.dom.board);
+    // console.log(thisPathfinder.dom.board);
   }
 
   clearBoard() {
@@ -229,7 +229,10 @@ class Pathfinder {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setStart') {
         const hoveredCell = event.target;
 
-        if (hoveredCell.classList.contains(classNames.board.cell)) {
+        const isCell = hoveredCell.classList.contains(classNames.board.cell);
+        const isWall = hoveredCell.classList.contains(classNames.board.wall);
+
+        if (isCell && !isWall) {
           startPosQueue.push(hoveredCell);
           startPosQueue[0].classList.remove(classNames.board.startPos);
           startPosQueue.shift();
@@ -262,7 +265,10 @@ class Pathfinder {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'setFinish') {
         const hoveredCell = event.target;
 
-        if (hoveredCell.classList.contains(classNames.board.cell)) {
+        const isCell = hoveredCell.classList.contains(classNames.board.cell);
+        const isWall = hoveredCell.classList.contains(classNames.board.wall);
+
+        if (isCell && !isWall) {
           finishPosQueue.push(hoveredCell);
           finishPosQueue[0].classList.remove(classNames.board.finishPos);
           finishPosQueue.shift();
@@ -290,7 +296,11 @@ class Pathfinder {
       if (thisPathfinder.holdingMouse && thisPathfinder.currentAction === 'drawWalls') {
         const hoveredCell = event.target;
 
-        if (hoveredCell.classList.contains(classNames.board.cell)) {
+        const isCell = hoveredCell.classList.contains(classNames.board.cell);
+        const isStartPos = hoveredCell.classList.contains(classNames.board.startPos);
+        const isFinishPos = hoveredCell.classList.contains(classNames.board.finishPos);
+
+        if (isCell && !isStartPos && !isFinishPos) {
           hoveredCell.classList.add(classNames.board.wall);
 
           if (!thisPathfinder.walls.includes(hoveredCell)) {
