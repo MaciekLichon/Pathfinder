@@ -17,6 +17,10 @@ header {
         text-decoration: none;
       }
 
+      a.algorithmSelected {
+        background: $dropdown-hover-color;
+      }
+
       .nav-elem {
         margin-right: 20px;
         padding: 10px;
@@ -46,7 +50,6 @@ header {
         transform: scale(1,1);
         transition-delay: 0s;
       }
-
 
     }
 

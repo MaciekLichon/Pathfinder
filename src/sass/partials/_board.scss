@@ -30,7 +30,6 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            background: red;
             top: 0;
             left: 0;
             animation: makeWall 0.3s;
@@ -51,6 +50,17 @@
               transform: scale(1);
             }
           }
+
+          .cell.visited::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            animation: makeVisited 1s;
+          }
+
 
           .start-pos {
             background-image: url('../../images/icons/map-marker-alt-solid.svg');
@@ -77,6 +87,28 @@
 
         .cell.wall::after {
           background: $theme-color-teal-wall;
+        }
+
+        .cell.visited::after {
+          background: $theme-color-teal-visited-three;
+        }
+
+        @keyframes makeVisited {
+          0% {
+            transform: scale(0.1);
+            border-radius: 50%;
+            background: $theme-color-teal-visited-one;
+          }
+          40% {
+            transform: scale(0.5);
+            background: $theme-color-teal-visited-two;
+            border-radius: 10px;
+          }
+          90% {
+            transform: scale(1);
+            background: $theme-color-teal-visited-three;
+            border-radius: 5px;
+          }
         }
       }
 

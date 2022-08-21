@@ -26,6 +26,7 @@ class Pathfinder {
     thisPathfinder.dom.actionsBar = thisPathfinder.dom.visualizer.querySelector(select.containerOf.allActions);
 
     thisPathfinder.dom.clearButton = thisPathfinder.dom.header.querySelector(select.header.clearBoard);
+    thisPathfinder.dom.algorithmSetters = thisPathfinder.dom.header.querySelectorAll(select.action.algorithm);
 
     thisPathfinder.dom.boardSizeSetters = thisPathfinder.dom.actionsBar.querySelectorAll(select.action.boardSize);
     thisPathfinder.dom.themeSetters = thisPathfinder.dom.actionsBar.querySelectorAll(select.action.theme);
@@ -36,8 +37,30 @@ class Pathfinder {
 
   }
 
+  // --------- INIT ALL BUTTONS --------- //
+
   initDropdownMenus() {
     const thisPathfinder = this;
+
+    // ALGORITHMS
+    for (let algorithmSetter of thisPathfinder.dom.algorithmSetters) {
+      algorithmSetter.addEventListener('click', function(event) {
+        event.preventDefault();
+        const clickedElement = event.target;
+
+        if (!clickedElement.classList.contains(classNames.state.algorithmSelected)) {
+          const currentlySelected = thisPathfinder.dom.header.querySelector(select.setter.algorithmSelected);
+          if (currentlySelected) {
+            currentlySelected.classList.remove(classNames.state.algorithmSelected);
+          }
+          clickedElement.classList.add(classNames.state.algorithmSelected);
+
+          const algorithm = clickedElement.getAttribute('data-algorithm');
+
+          thisPathfinder.runAlgorithm(algorithm);
+        }
+      });
+    }
 
     // BOARD SIZE
     for (let sizeSetter of thisPathfinder.dom.boardSizeSetters) {
@@ -125,21 +148,7 @@ class Pathfinder {
     });
   }
 
-  initStage(name) {
-    const thisPathfinder = this;
-
-    if (name === 'setStart') {
-      thisPathfinder.setStart();
-    } else if (name === 'setMidPoint') {
-      thisPathfinder.setMidPoint();
-    } else if (name === 'setFinish') {
-      thisPathfinder.setFinish();
-    } else if (name === 'drawWalls') {
-      thisPathfinder.drawWalls();
-    } else if (name === 'ereaseWalls') {
-      thisPathfinder.ereaseWalls();
-    }
-  }
+  // --------- TRACK MOUSE HOLDING --------- //
 
   initMouseHoldTracking() {
     const thisPathfinder = this;
@@ -157,6 +166,8 @@ class Pathfinder {
     };
   }
 
+  // --------- DEFINE BOARD --------- //
+
   renderBoard(rows, columns) {
     const thisPathfinder = this;
 
@@ -166,15 +177,20 @@ class Pathfinder {
     thisPathfinder.rows = rows;
     thisPathfinder.columns = columns;
 
+    let cellCount = 0;
+
     for (let i = 0; i < thisPathfinder.rows; i++) {
       const row = document.createElement('div');
       row.classList.add(classNames.board.row);
 
       for (let j = 0; j < thisPathfinder.columns; j++) {
         const cell = document.createElement('div');
+        cellCount += 1;
         cell.classList.add(classNames.board.cell);
         cell.setAttribute('row', i+1);
         cell.setAttribute('column', j+1);
+        cell.setAttribute('num', cellCount);
+        // cell.innerHTML = cellCount;
         row.appendChild(cell);
       }
 
@@ -208,6 +224,24 @@ class Pathfinder {
     }
     thisPathfinder.setFinish();
 
+  }
+
+  // --------- DRAWING ACTIONS --------- //
+
+  initStage(name) {
+    const thisPathfinder = this;
+
+    if (name === 'setStart') {
+      thisPathfinder.setStart();
+    } else if (name === 'setMidPoint') {
+      thisPathfinder.setMidPoint();
+    } else if (name === 'setFinish') {
+      thisPathfinder.setFinish();
+    } else if (name === 'drawWalls') {
+      thisPathfinder.drawWalls();
+    } else if (name === 'ereaseWalls') {
+      thisPathfinder.ereaseWalls();
+    }
   }
 
   setStart() {
@@ -327,6 +361,123 @@ class Pathfinder {
         }
       }
     });
+  }
+
+  // --------- ALGORITHMS --------- //
+
+  convertBoardToObject() {
+    const thisPathfinder = this;
+
+    const boardObj = {};
+
+    const allCells = thisPathfinder.dom.board.querySelectorAll(select.board.cell);
+
+    for (let cell of allCells) {
+      const cellNum = parseInt(cell.getAttribute('num'));
+      const cellRow = parseInt(cell.getAttribute('row'));
+      const cellCol = parseInt(cell.getAttribute('column'));
+      let cellNeighbours = [];
+
+      let left = cellNum - 1;
+      let right = cellNum + 1;
+      let above = cellNum - thisPathfinder.columns;
+      let below = cellNum + thisPathfinder.columns;
+
+
+      if (cellRow === 1 && cellCol === 1) { // top left corner
+        cellNeighbours = [right, below];
+      }
+      else if (cellRow === 1 && cellCol === thisPathfinder.columns) { // top right corner
+        cellNeighbours = [left, below];
+      }
+      else if (cellRow === thisPathfinder.rows && cellCol === 1) { // bottom left corner
+        cellNeighbours = [right, above];
+      }
+      else if (cellRow === thisPathfinder.rows && cellCol === thisPathfinder.columns) { // bottom right corner
+        cellNeighbours = [left, above];
+      }
+      else if (cellRow === 1) { // top row
+        cellNeighbours = [below, left, right];
+      }
+      else if (cellRow === thisPathfinder.rows) { // bottom row
+        cellNeighbours = [above, left, right];
+      }
+      else if (cellCol === 1) { // left column
+        cellNeighbours = [right, below, above];
+      }
+      else if (cellCol === thisPathfinder.columns) { // right column
+        cellNeighbours = [left, below, above];
+      }
+      else { // the rest (middle)
+        cellNeighbours = [left, right, below, above];
+      }
+
+      const cellsToIgnore = [];
+
+      for (let neighbour of cellNeighbours) {
+        const neighbourCell = thisPathfinder.dom.board.querySelector(`[num="${neighbour}"]`);
+
+        if (neighbourCell.classList.contains(classNames.board.wall)) {
+          cellsToIgnore.push(neighbour);
+        }
+      }
+
+      cellNeighbours = cellNeighbours.filter(cell => !cellsToIgnore.includes(cell));
+
+      boardObj[cellNum] = cellNeighbours;
+    }
+
+    return boardObj;
+  }
+
+  runAlgorithm(name) {
+    const thisPathfinder = this;
+
+    if (name === 'depthFirst') {
+      thisPathfinder.depthFirst();
+    }
+  }
+
+  depthFirst() {
+    const thisPathfinder = this;
+
+    const startPosCell = parseInt(thisPathfinder.dom.startPos.getAttribute('num'));
+    const finishPosCell = parseInt(thisPathfinder.dom.finishPos.getAttribute('num'));
+    const board = thisPathfinder.convertBoardToObject();
+
+    const stack = [ startPosCell ];
+    const alreadyVisitedCells = [];
+
+    console.log(board);
+
+    const interval = setInterval(function() {
+
+      console.log(stack);
+      const currentCell = stack.pop();
+      console.log(currentCell);
+      alreadyVisitedCells.push(currentCell);
+
+      if (currentCell === finishPosCell) {
+        clearInterval(interval);
+        console.log('match');
+      }
+
+      const currentCellDOM = thisPathfinder.dom.board.querySelector(`[num="${currentCell}"]`);
+      const isStartPos = currentCellDOM.classList.contains(classNames.board.startPos);
+      const isFinishPos = currentCellDOM.classList.contains(classNames.board.finishPos);
+
+      if (!isStartPos && !isFinishPos) {
+        currentCellDOM.classList.add(classNames.state.visited);
+      }
+
+      for (let neighbour of board[currentCell]) {
+        if (!alreadyVisitedCells.includes(neighbour)) {
+          stack.push(neighbour);
+        }
+      }
+
+    }, 100);
+
   }
 
 }

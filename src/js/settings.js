@@ -24,7 +24,11 @@ export const select = {
   header: {
     clearBoard: '[action=clear]',
   },
+  board: {
+    cell: '.cell',
+  },
   action: {
+    algorithm: '.algorithm-selector',
     boardSize: '.board-size-selector',
     theme: '.theme-selector',
     walls: '.setting.walls',
@@ -40,6 +44,7 @@ export const select = {
   setter: {
     sizeSelected: '.sizeSelected',
     themeSelected: '.themeSelected',
+    algorithmSelected: '.algorithmSelected'
   }
 };
 
@@ -58,5 +63,7 @@ export const classNames = {
     active: 'active',
     sizeSelected: 'sizeSelected',
     themeSelected: 'themeSelected',
+    algorithmSelected: 'algorithmSelected',
+    visited: 'visited',
   }
 };
