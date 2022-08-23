@@ -25,6 +25,8 @@ export const select = {
   timer: {
     counter: '.counter',
     dropdown: '.dropdown-content',
+    resetButton: '.reset-scores',
+    score: '.score'
   },
   header: {
     clearBoard: '[action=clear]',
@@ -71,5 +73,9 @@ export const classNames = {
     themeSelected: 'themeSelected',
     algorithmSelected: 'algorithmSelected',
     visited: 'visited',
+    revisited: 'revisited',
+  },
+  timer: {
+    score: 'score',
   }
 };

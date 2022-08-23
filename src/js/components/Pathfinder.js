@@ -39,6 +39,7 @@ class Pathfinder {
 
     thisPathfinder.dom.timerCounter = thisPathfinder.dom.timer.querySelector(select.timer.counter);
     thisPathfinder.dom.timerDropdown = thisPathfinder.dom.timer.querySelector(select.timer.dropdown);
+    thisPathfinder.dom.timerResetButton = thisPathfinder.dom.timer.querySelector(select.timer.resetButton);
   }
 
   // --------- INIT ALL BUTTONS --------- //
@@ -121,6 +122,12 @@ class Pathfinder {
         }
       });
     }
+
+    // TIMER
+    thisPathfinder.dom.timerResetButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      thisPathfinder.resetScores();
+    });
   }
 
   initActionButtons() {
@@ -199,6 +206,7 @@ class Pathfinder {
     const currentAlgorithm = thisPathfinder.selectedAlgorithmName;
 
     const newTime = document.createElement('li');
+    newTime.classList.add(classNames.timer.score);
     newTime.innerHTML = `${currentAlgorithm}: ${currentTime}`;
 
     thisPathfinder.dom.timerDropdown.appendChild(newTime);
@@ -209,7 +217,10 @@ class Pathfinder {
   resetScores() {
     const thisPathfinder = this;
 
-    
+    const scores = thisPathfinder.dom.timerDropdown.querySelectorAll(select.timer.score);
+    for (let score of scores) {
+      score.remove();
+    }
   }
 
   // --------- DEFINE BOARD --------- //
@@ -279,6 +290,7 @@ class Pathfinder {
 
     // reset timer
     thisPathfinder.dom.timerCounter.innerHTML = '0 sec';
+    thisPathfinder.resetScores();
 
   }
 
@@ -525,7 +537,7 @@ class Pathfinder {
     const stack = [ startPosCell ];
     const alreadyVisitedCells = [];
 
-    console.log(board);
+    // console.log(board);
     thisPathfinder.startTimer();
 
     const interval = setInterval(function() {
