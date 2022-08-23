@@ -21,13 +21,13 @@
               <span>Algorithms</span>
               <ul class="dropdown-content">
                 <li><a href="" class="algorithm-selector" data-algorithm="depthFirst">Depth first</a></li>
-                <li><a href="" class="algorithm-selector">Algo 2</a></li>
-                <li><a href="" class="algorithm-selector">Algo 3</a></li>
+                <li><a href="" class="algorithm-selector" data-algorithm="breadthFirst">Breadth first</a></li>
+                <li><a href="" class="algorithm-selector" data-algorithm="aStar">A star</a></li>
               </ul>
             </div>
             <a href="" class="nav-elem">Add maze</a>
             <a href="" class="nav-elem" action="clear">Clear board</a>
-            <a href="" class="nav-elem">Visualize</a>
+            <a href="" class="nav-elem" action="visualize">Visualize</a>
           </div>
           <div class="logo">
             <p class="title">Pathfinder</p>
@@ -46,7 +46,7 @@
                   <li class="dropdown-title"><p>Board size</p></li>
                   <li><a href="" class="board-size-selector" data-rows="30" data-columns="50">Big</a></li>
                   <li><a href="" class="board-size-selector sizeSelected" data-rows="20" data-columns="35">Medium</a></li>
-                  <li><a href="" class="board-size-selector" data-rows="5" data-columns="5">Small</a></li>
+                  <li><a href="" class="board-size-selector" data-rows="6" data-columns="6">Small</a></li>
                   <li class="dropdown-title"><p>Color theme</p></li>
                   <li><a href="" class="theme-selector themeSelected" data-theme="teal" body-color="#abd5c0">Teal</a></li>
                   <li><a href="" class="theme-selector" data-theme="tan" body-color="#dfcd9f">Tan</a></li>
@@ -83,7 +83,18 @@
             </div>
           </div>
           <div class="board-container">
-            <div class="board blue">
+            <div class="timer dropdown-button">
+              <div class="counter">
+                0 sec
+              </div>
+              <ul class="dropdown-content">
+                <li><a href="">Reset scores</a></li>
+              </ul>
+              <div class="hover-icon">
+                <i class="fas fa-angle-double-down"></i>
+              </div>
+            </div>
+            <div class="board teal">
 
             </div>
           </div>

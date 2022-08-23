@@ -8,6 +8,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+      position: relative;
 
       .board {
         display: flex;
@@ -25,7 +26,7 @@
             position: relative;
           }
 
-          .cell.wall::after {
+          .cell.wall::after, .cell.visited::after {
             content: '';
             position: absolute;
             width: 100%;
@@ -51,16 +52,6 @@
             }
           }
 
-          .cell.visited::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            animation: makeVisited 1s;
-          }
-
 
           .start-pos {
             background-image: url('../../images/icons/map-marker-alt-solid.svg');
@@ -76,9 +67,46 @@
         }
       }
 
-      // Themes
+      .timer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 15%;
+        height: 10%;
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $timer-color;
+        border-radius: 5px 5px 0 0;
+        z-index: 50;
+        font-size: $font-size-timer;
 
-      .board.blue {
+        .hover-icon {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          margin: 5px;
+          font-size: $font-size-timer-dropdown;
+        }
+
+        .dropdown-content {
+          font-size: $font-size-timer-dropdown;
+          background: $timer-color;
+
+          a {
+            background: $timer-color-darker;
+          }
+
+          li {
+            pointer-events: none;
+          }
+        }
+      }
+
+      // ----------------- THEMES ----------------- //
+
+      .board.teal {
         border-color: $theme-color-teal;
 
         .cell {
@@ -91,19 +119,22 @@
 
         .cell.visited::after {
           background: $theme-color-teal-visited-three;
+          animation: makeVisitedTeal 1s;
         }
 
-        @keyframes makeVisited {
+        @keyframes makeVisitedTeal {
           0% {
             transform: scale(0.1);
             border-radius: 50%;
             background: $theme-color-teal-visited-one;
           }
+
           40% {
             transform: scale(0.5);
             background: $theme-color-teal-visited-two;
             border-radius: 10px;
           }
+
           90% {
             transform: scale(1);
             background: $theme-color-teal-visited-three;
@@ -122,6 +153,31 @@
         .cell.wall::after {
           background: $theme-color-tan-wall;
         }
+
+        .cell.visited::after {
+          background: $theme-color-tan-visited-three;
+          animation: makeVisitedTan 1s;
+        }
+
+        @keyframes makeVisitedTan {
+          0% {
+            transform: scale(0.1);
+            border-radius: 50%;
+            background: $theme-color-tan-visited-one;
+          }
+
+          40% {
+            transform: scale(0.5);
+            background: $theme-color-tan-visited-two;
+            border-radius: 10px;
+          }
+
+          90% {
+            transform: scale(1);
+            background: $theme-color-tan-visited-three;
+            border-radius: 5px;
+          }
+        }
       }
 
       .board.lavender {
@@ -133,6 +189,31 @@
 
         .cell.wall::after {
           background: $theme-color-lavender-wall;
+        }
+
+        .cell.visited::after {
+          background: $theme-color-lavender-visited-three;
+          animation: makeVisitedLavender 1s;
+        }
+
+        @keyframes makeVisitedLavender {
+          0% {
+            transform: scale(0.1);
+            border-radius: 50%;
+            background: $theme-color-lavender-visited-one;
+          }
+
+          40% {
+            transform: scale(0.5);
+            background: $theme-color-lavender-visited-two;
+            border-radius: 10px;
+          }
+
+          90% {
+            transform: scale(1);
+            background: $theme-color-lavender-visited-three;
+            border-radius: 5px;
+          }
         }
       }
     }

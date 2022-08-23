@@ -77,6 +77,10 @@
           min-width: 500%;
           font-size: $font-size-settings-info;
 
+          a {
+            font-size: $font-size-settings-info;
+          }
+
           .sizeSelected, .themeSelected {
             background: $dropdown-hover-color;
           }

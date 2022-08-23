@@ -20,9 +20,15 @@ export const select = {
     allActions: '.settings-container',
     drawingActions: '.board-settings',
     header: '.header',
+    timer: '.timer',
+  },
+  timer: {
+    counter: '.counter',
+    dropdown: '.dropdown-content',
   },
   header: {
     clearBoard: '[action=clear]',
+    visualize: '[action=visualize]',
   },
   board: {
     cell: '.cell',

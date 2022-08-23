@@ -6,6 +6,8 @@ $board-color: white;
 $settings-color: #f5f5f5;
 $info-box-color: black;
 $borders-color: black;
+$timer-color: rgba(211,211,211, 0.8);
+$timer-color-darker: rgba(128,128,128, 0.4);
 
 // themes
 $theme-color-teal: #abd5c0;
@@ -16,10 +18,16 @@ $theme-color-teal-visited-three: #d5eadf;
 
 $theme-color-tan: #dfcd9f;
 $theme-color-tan-wall: #9c8f6f;
+$theme-color-tan-visited-one: #423d2f;
+$theme-color-tan-visited-two: #857b5f;
+$theme-color-tan-visited-three: #efe6cf;
 
 
 $theme-color-lavender: #bcbcf2;
 $theme-color-lavender-wall: #8383a9;
+$theme-color-lavender-visited-one: #383848;
+$theme-color-lavender-visited-two: #707091;
+$theme-color-lavender-visited-three: #ddddf8;
 
 
 body {
