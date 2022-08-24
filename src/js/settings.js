@@ -34,6 +34,7 @@ export const select = {
   },
   board: {
     cell: '.cell',
+    visited: '.visited',
   },
   action: {
     algorithm: '.algorithm-selector',
