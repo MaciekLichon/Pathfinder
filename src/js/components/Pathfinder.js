@@ -1,9 +1,13 @@
 import { settings, select, classNames } from '../settings.js';
 import { utils } from '../utils.js';
 
+import Timer from './Timer.js';
+
 import { depthFirst } from '../algorithms/depthFirst.js';
 import { breadthFirst } from '../algorithms/breadthFirst.js';
 import { aStar } from '../algorithms/aStar.js';
+import { randomWalk } from '../algorithms/randomWalk.js';
+
 
 class Pathfinder {
   constructor() {
@@ -16,6 +20,8 @@ class Pathfinder {
     thisPathfinder.initActionButtons();
     thisPathfinder.initHeader();
     thisPathfinder.initMouseHoldTracking();
+
+    thisPathfinder.timerWidget = new Timer;
   }
 
   getElements() {
@@ -130,7 +136,7 @@ class Pathfinder {
     // TIMER
     thisPathfinder.dom.timerResetButton.addEventListener('click', function(event) {
       event.preventDefault();
-      thisPathfinder.resetScores();
+      thisPathfinder.timerWidget.resetScores();
     });
   }
 
@@ -192,41 +198,6 @@ class Pathfinder {
     };
   }
 
-  // --------- TIMER --------- //
-  startTimer() {
-    const thisPathfinder = this;
-
-    let count = 0;
-    thisPathfinder.timerInterval = setInterval(function() {
-      count += 1;
-      thisPathfinder.dom.timerCounter.innerHTML = `${count} sec`;
-    }, 1000);
-  }
-
-  stopTimer() {
-    const thisPathfinder = this;
-
-    const currentTime = thisPathfinder.dom.timerCounter.innerHTML;
-    const currentAlgorithm = thisPathfinder.selectedAlgorithmName;
-
-    const newTime = document.createElement('li');
-    newTime.classList.add(classNames.timer.score);
-    newTime.innerHTML = `${currentAlgorithm}: ${currentTime}`;
-
-    thisPathfinder.dom.timerDropdown.appendChild(newTime);
-
-    clearInterval(thisPathfinder.timerInterval);
-  }
-
-  resetScores() {
-    const thisPathfinder = this;
-
-    const scores = thisPathfinder.dom.timerDropdown.querySelectorAll(select.timer.score);
-    for (let score of scores) {
-      score.remove();
-    }
-  }
-
   // --------- DEFINE BOARD --------- //
 
   renderBoard(rows, columns) {
@@ -274,7 +245,6 @@ class Pathfinder {
 
     // remove all visited
     const visited = thisPathfinder.dom.board.querySelectorAll(select.board.visited);
-    console.log(visited);
     for (let cell of visited) {
       cell.classList.remove(classNames.state.visited);
     }
@@ -296,7 +266,7 @@ class Pathfinder {
 
     // reset timer
     thisPathfinder.dom.timerCounter.innerHTML = '0 sec';
-    thisPathfinder.resetScores();
+    thisPathfinder.timerWidget.resetScores();
 
   }
 
@@ -305,7 +275,6 @@ class Pathfinder {
 
     // remove all visited
     const visited = thisPathfinder.dom.board.querySelectorAll(select.board.visited);
-    console.log(visited);
     for (let cell of visited) {
       cell.classList.remove(classNames.state.visited);
     }
@@ -457,19 +426,27 @@ class Pathfinder {
   runAlgorithm(name) {
     const thisPathfinder = this;
 
-    const startPosCell = parseInt(thisPathfinder.dom.startPos.getAttribute('num'));
-    const finishPosCell = parseInt(thisPathfinder.dom.finishPos.getAttribute('num'));
-    const board = thisPathfinder.convertBoardToObject();
+    const params = {
+      startPosCell: parseInt(thisPathfinder.dom.startPos.getAttribute('num')),
+      finishPosCell: parseInt(thisPathfinder.dom.finishPos.getAttribute('num')),
+      board: thisPathfinder.convertBoardToObject(),
+      timerWidget: thisPathfinder.timerWidget,
+      selectedAlgorithmName: thisPathfinder.selectedAlgorithmName,
+    };
 
     if (name === 'depthFirst') {
-      depthFirst(startPosCell, finishPosCell, board);
+      depthFirst(params);
     }
     else if (name === 'breadthFirst') {
-      breadthFirst(startPosCell, finishPosCell, board);
+      breadthFirst(params);
     }
     else if (name === 'aStar') {
-      aStar(startPosCell, finishPosCell, board);
+      aStar(params);
     }
+    else if (name === 'randomWalk') {
+      randomWalk(params);
+    }
+
   }
 
   convertBoardToObject() {

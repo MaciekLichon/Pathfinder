@@ -74,7 +74,7 @@ export const classNames = {
     themeSelected: 'themeSelected',
     algorithmSelected: 'algorithmSelected',
     visited: 'visited',
-    revisited: 'revisited',
+    leader: 'leader',
   },
   timer: {
     score: 'score',

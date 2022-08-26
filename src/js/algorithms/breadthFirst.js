@@ -1,13 +1,13 @@
 import { classNames } from '../settings.js';
 
-export const breadthFirst = function(startPosCell, finishPosCell, board) {
+export const breadthFirst = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
 
   // const visited = [];
 
   const queue = [ startPosCell ];
   const alreadyVisitedCells = [];
 
-  // thisPathfinder.startTimer();
+  timerWidget.startTimer();
 
   const interval = setInterval(function() {
 
@@ -16,7 +16,7 @@ export const breadthFirst = function(startPosCell, finishPosCell, board) {
 
     if (currentCell === finishPosCell) {
       clearInterval(interval);
-      // thisPathfinder.stopTimer();
+      timerWidget.stopTimer(selectedAlgorithmName);
       console.log('match');
     }
 

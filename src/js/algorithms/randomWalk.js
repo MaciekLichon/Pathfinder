@@ -1,21 +1,16 @@
-import { classNames } from '../settings.js';
+import { classNames, select } from '../settings.js';
 
-export const depthFirst = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
+export const randomWalk = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
 
-  // const visited = [];
-
-  const stack = [ startPosCell ];
   const alreadyVisitedCells = [];
+  let currentCell = startPosCell;
 
-  // console.log(board);
   timerWidget.startTimer();
 
   const interval = setInterval(function() {
 
-    const currentCell = stack.pop();
-    // console.log('current', currentCell);
-    alreadyVisitedCells.push(currentCell);
-    // console.log('already visited', alreadyVisitedCells);
+    const neighbours = board[currentCell];
+    const neighboursCount = neighbours.length;
 
     if (currentCell === finishPosCell) {
       clearInterval(interval);
@@ -33,17 +28,21 @@ export const depthFirst = function({ startPosCell, finishPosCell, board, timerWi
       setTimeout(function() {
         currentCellDOM.classList.remove(classNames.state.leader);
       }, 20);
-      // visited.push(currentCellDOM);
+      alreadyVisitedCells.push(currentCellDOM);
     }
 
-    for (let neighbour of board[currentCell]) {
-      // if (!alreadyVisitedCells.includes(neighbour) && !stack.includes(neighbour)) {
-      if (!alreadyVisitedCells.includes(neighbour)) { // do we add the same neighbor to the stack multiple times or not?
-        stack.push(neighbour);
-      }
-    }
-    // console.log('stack', stack);
+    const nextMoveIndex = getRandom(neighboursCount);
+    currentCell = neighbours[nextMoveIndex];
 
   }, 20);
 
+  const listener = document.querySelector(select.containerOf.board);
+  listener.addEventListener('click', function() {
+    clearInterval(interval);
+  });
+
+};
+
+const getRandom = function(num) {
+  return Math.floor(Math.random() * num);
 };

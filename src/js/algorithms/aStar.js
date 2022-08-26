@@ -1,6 +1,6 @@
 import { classNames } from '../settings.js';
 
-export const aStar = function(startPosCell, finishPosCell, board) {
+export const aStar = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
 
   // --------- ALGORITHM PREP --------- //
 
@@ -24,7 +24,8 @@ export const aStar = function(startPosCell, finishPosCell, board) {
   const openSet = [ board[startPosCell] ]; // yet to check (only neighbours can be added)
   const closedSet = []; // already checked
   let path = [];
-  // thisPathfinder.startTimer();
+
+  timerWidget.startTimer();
 
   // --------- ALGORITHM START --------- //
 
@@ -63,7 +64,7 @@ export const aStar = function(startPosCell, finishPosCell, board) {
       path = path.reverse();
       console.log('path', path);
       clearInterval(interval);
-      // thisPathfinder.stopTimer();
+      timerWidget.stopTimer(selectedAlgorithmName);
       return;
     }
 
