@@ -31,10 +31,12 @@ export const select = {
   header: {
     clearBoard: '[action=clear]',
     visualize: '[action=visualize]',
+    maze: '[action=maze]',
   },
   board: {
     cell: '.cell',
     visited: '.visited',
+    row: '.row',
   },
   action: {
     algorithm: '.algorithm-selector',

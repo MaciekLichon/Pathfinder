@@ -7,6 +7,7 @@ import { depthFirst } from '../algorithms/depthFirst.js';
 import { breadthFirst } from '../algorithms/breadthFirst.js';
 import { aStar } from '../algorithms/aStar.js';
 import { randomWalk } from '../algorithms/randomWalk.js';
+import { drawMaze } from '../algorithms/maze.js';
 
 
 class Pathfinder {
@@ -39,6 +40,7 @@ class Pathfinder {
     thisPathfinder.dom.clearButton = thisPathfinder.dom.header.querySelector(select.header.clearBoard);
     thisPathfinder.dom.algorithmSetters = thisPathfinder.dom.header.querySelectorAll(select.action.algorithm);
     thisPathfinder.dom.visualizeButton = thisPathfinder.dom.header.querySelector(select.header.visualize);
+    thisPathfinder.dom.addMazeButton = thisPathfinder.dom.header.querySelector(select.header.maze);
 
     thisPathfinder.dom.boardSizeSetters = thisPathfinder.dom.actionsBar.querySelectorAll(select.action.boardSize);
     thisPathfinder.dom.themeSetters = thisPathfinder.dom.actionsBar.querySelectorAll(select.action.theme);
@@ -175,8 +177,14 @@ class Pathfinder {
     thisPathfinder.dom.visualizeButton.addEventListener('click', function(event) {
       event.preventDefault();
       if (thisPathfinder.selectedAlgorithm) {
-        thisPathfinder.runAlgorithm(thisPathfinder.selectedAlgorithm);
+        thisPathfinder.runPathAlgorithm(thisPathfinder.selectedAlgorithm);
       }
+    });
+
+    thisPathfinder.dom.addMazeButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      drawMaze(thisPathfinder.rowCellObj, thisPathfinder.rows, thisPathfinder.columns);
+      // thisPathfinder.rowCellObj may not be useful
     });
   }
 
@@ -206,9 +214,11 @@ class Pathfinder {
     thisPathfinder.dom.board.innerHTML = '';
 
     thisPathfinder.walls = [];
+    thisPathfinder.rowCellObj = {};
     // thisPathfinder.visited = [];
     thisPathfinder.rows = rows;
     thisPathfinder.columns = columns;
+
 
     let cellCount = 0;
 
@@ -216,6 +226,7 @@ class Pathfinder {
       const row = document.createElement('div');
       row.classList.add(classNames.board.row);
 
+      let rowCells = [];
       for (let j = 0; j < thisPathfinder.columns; j++) {
         const cell = document.createElement('div');
         cellCount += 1;
@@ -225,10 +236,13 @@ class Pathfinder {
         cell.setAttribute('num', cellCount);
         // cell.innerHTML = cellCount;
         row.appendChild(cell);
+        rowCells.push(cellCount);
       }
-
+      // console.log(rowCells);
+      thisPathfinder.rowCellObj[i+1] = rowCells;
       thisPathfinder.dom.board.appendChild(row);
     }
+    console.log(thisPathfinder.rowCellObj);
     thisPathfinder.setStart();
     thisPathfinder.setFinish();
     // console.log(thisPathfinder.dom.board);
@@ -423,7 +437,7 @@ class Pathfinder {
 
   // --------- ALGORITHMS --------- //
 
-  runAlgorithm(name) {
+  runPathAlgorithm(name) {
     const thisPathfinder = this;
 
     const params = {
