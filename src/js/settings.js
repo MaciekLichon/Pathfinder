@@ -37,6 +37,7 @@ export const select = {
     cell: '.cell',
     visited: '.visited',
     row: '.row',
+    wall: '.wall',
   },
   action: {
     algorithm: '.algorithm-selector',

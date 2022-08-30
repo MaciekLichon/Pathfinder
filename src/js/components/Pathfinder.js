@@ -7,6 +7,7 @@ import { depthFirst } from '../algorithms/depthFirst.js';
 import { breadthFirst } from '../algorithms/breadthFirst.js';
 import { aStar } from '../algorithms/aStar.js';
 import { randomWalk } from '../algorithms/randomWalk.js';
+import { dijkstra } from '../algorithms/dijkstra.js';
 import { drawMaze } from '../algorithms/maze.js';
 
 
@@ -196,12 +197,12 @@ class Pathfinder {
     thisPathfinder.holdingMouse = false;
 
     thisPathfinder.dom.board.onmousedown = function() {
-      console.log('down');
+      // console.log('down');
       thisPathfinder.holdingMouse = true;
     };
 
     thisPathfinder.dom.board.onmouseup = function() {
-      console.log('up');
+      // console.log('up');
       thisPathfinder.holdingMouse = false;
     };
   }
@@ -215,7 +216,7 @@ class Pathfinder {
 
     thisPathfinder.walls = [];
     thisPathfinder.rowCellObj = {};
-    // thisPathfinder.visited = [];
+    thisPathfinder.visited = [];
     thisPathfinder.rows = rows;
     thisPathfinder.columns = columns;
 
@@ -234,7 +235,7 @@ class Pathfinder {
         cell.setAttribute('row', i+1);
         cell.setAttribute('column', j+1);
         cell.setAttribute('num', cellCount);
-        // cell.innerHTML = cellCount;
+        cell.innerHTML = cellCount;
         row.appendChild(cell);
         rowCells.push(cellCount);
       }
@@ -242,7 +243,7 @@ class Pathfinder {
       thisPathfinder.rowCellObj[i+1] = rowCells;
       thisPathfinder.dom.board.appendChild(row);
     }
-    console.log(thisPathfinder.rowCellObj);
+    // console.log(thisPathfinder.rowCellObj);
     thisPathfinder.setStart();
     thisPathfinder.setFinish();
     // console.log(thisPathfinder.dom.board);
@@ -251,11 +252,17 @@ class Pathfinder {
   clearBoard() {
     const thisPathfinder = this;
 
-    // remove all walls
+    // remove all drawn walls
     for (let wall of thisPathfinder.walls) {
       wall.classList.remove(classNames.board.wall);
     }
     thisPathfinder.walls = [];
+
+    // remove walls created by maze
+    const mazeWalls = thisPathfinder.dom.board.querySelectorAll(select.board.wall);
+    for (let wall of mazeWalls) {
+      wall.classList.remove(classNames.board.wall);
+    }
 
     // remove all visited
     const visited = thisPathfinder.dom.board.querySelectorAll(select.board.visited);
@@ -459,6 +466,9 @@ class Pathfinder {
     }
     else if (name === 'randomWalk') {
       randomWalk(params);
+    }
+    else if (name === 'dijkstra') {
+      dijkstra(params);
     }
 
   }

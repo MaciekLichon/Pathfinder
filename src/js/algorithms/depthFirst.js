@@ -20,7 +20,7 @@ export const depthFirst = function({ startPosCell, finishPosCell, board, timerWi
     if (currentCell === finishPosCell) {
       clearInterval(interval);
       timerWidget.stopTimer(selectedAlgorithmName);
-      console.log('match');
+      // console.log('match');
     }
 
     const currentCellDOM = document.querySelector(`[num="${currentCell}"]`);

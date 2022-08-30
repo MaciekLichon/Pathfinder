@@ -121,8 +121,8 @@ const adjustPassageVertical = function(passageY, passageYTwo, initYPos, endYPos,
       passageY = initYPos;
       if (!cellBelowWall.classList.contains(classNames.board.wall)) {
         passageYTwo = endYPos;
-        console.log('----------- passageYTwo used');
-        console.log(cellAboveWall, cellBelowWall);
+        // console.log('----------- passageYTwo used');
+        // console.log(cellAboveWall, cellBelowWall);
       }
     } else {
       passageY = endYPos;
@@ -155,8 +155,8 @@ const adjustPassageHorizontal = function(passageX, passageXTwo, initXPos, endXPo
       passageX = endXPos;
       if (!cellLeftToWall.classList.contains(classNames.board.wall)) {
         passageXTwo = initXPos;
-        console.log('----------- passageXTwo');
-        console.log(cellRightToWall, cellLeftToWall);
+        // console.log('----------- passageXTwo');
+        // console.log(cellRightToWall, cellLeftToWall);
       }
     } else {
       passageX = initXPos;

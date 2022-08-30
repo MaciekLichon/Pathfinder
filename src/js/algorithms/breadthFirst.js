@@ -17,7 +17,7 @@ export const breadthFirst = function({ startPosCell, finishPosCell, board, timer
     if (currentCell === finishPosCell) {
       clearInterval(interval);
       timerWidget.stopTimer(selectedAlgorithmName);
-      console.log('match');
+      // console.log('match');
     }
 
     const currentCellDOM = document.querySelector(`[num="${currentCell}"]`);

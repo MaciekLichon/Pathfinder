@@ -62,7 +62,7 @@ export const aStar = function({ startPosCell, finishPosCell, board, timerWidget,
         pathElement = pathElement.parent; // change current pathElement to recently checked parent to get its parent again
       }
       path = path.reverse();
-      console.log('path', path);
+      // console.log('path', path);
       clearInterval(interval);
       timerWidget.stopTimer(selectedAlgorithmName);
       return;
