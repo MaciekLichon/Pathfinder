@@ -1,6 +1,6 @@
 import { classNames } from '../settings.js';
 
-export const drawMaze = function(grid, rows, columns) {
+export const drawMaze = function(rows, columns) {
 
   divide(1, 1, columns, rows);
 

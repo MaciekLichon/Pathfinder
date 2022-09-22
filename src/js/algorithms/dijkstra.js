@@ -1,4 +1,5 @@
 import { classNames } from '../settings.js';
+import { utils } from '../utils.js';
 
 export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
 
@@ -93,6 +94,7 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
       console.log('path', path);
       clearInterval(interval);
       timerWidget.stopTimer(selectedAlgorithmName);
+      utils.drawPath(path);
       return;
     }
 

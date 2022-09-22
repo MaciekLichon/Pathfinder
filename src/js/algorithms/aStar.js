@@ -1,4 +1,5 @@
 import { classNames } from '../settings.js';
+import { utils } from '../utils.js';
 
 export const aStar = function({ startPosCell, finishPosCell, board, timerWidget, selectedAlgorithmName }) {
 
@@ -65,6 +66,7 @@ export const aStar = function({ startPosCell, finishPosCell, board, timerWidget,
       // console.log('path', path);
       clearInterval(interval);
       timerWidget.stopTimer(selectedAlgorithmName);
+      utils.drawPath(path);
       return;
     }
 

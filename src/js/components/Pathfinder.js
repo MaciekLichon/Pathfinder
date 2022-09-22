@@ -2,6 +2,7 @@ import { settings, select, classNames } from '../settings.js';
 import { utils } from '../utils.js';
 
 import Timer from './Timer.js';
+import Modal from './Modal.js';
 
 import { depthFirst } from '../algorithms/depthFirst.js';
 import { breadthFirst } from '../algorithms/breadthFirst.js';
@@ -24,6 +25,7 @@ class Pathfinder {
     thisPathfinder.initMouseHoldTracking();
 
     thisPathfinder.timerWidget = new Timer;
+    thisPathfinder.modal = new Modal;
   }
 
   getElements() {
@@ -179,13 +181,15 @@ class Pathfinder {
       event.preventDefault();
       if (thisPathfinder.selectedAlgorithm) {
         thisPathfinder.runPathAlgorithm(thisPathfinder.selectedAlgorithm);
+      } else {
+        thisPathfinder.modal.showModal();
       }
     });
 
     thisPathfinder.dom.addMazeButton.addEventListener('click', function(event) {
       event.preventDefault();
-      drawMaze(thisPathfinder.rowCellObj, thisPathfinder.rows, thisPathfinder.columns);
-      // thisPathfinder.rowCellObj may not be useful
+      thisPathfinder.clearBoard();
+      drawMaze(thisPathfinder.rows, thisPathfinder.columns);
     });
   }
 
@@ -197,12 +201,12 @@ class Pathfinder {
     thisPathfinder.holdingMouse = false;
 
     thisPathfinder.dom.board.onmousedown = function() {
-      // console.log('down');
+      console.log('down');
       thisPathfinder.holdingMouse = true;
     };
 
     thisPathfinder.dom.board.onmouseup = function() {
-      // console.log('up');
+      console.log('up');
       thisPathfinder.holdingMouse = false;
     };
   }
@@ -235,7 +239,7 @@ class Pathfinder {
         cell.setAttribute('row', i+1);
         cell.setAttribute('column', j+1);
         cell.setAttribute('num', cellCount);
-        cell.innerHTML = cellCount;
+        // cell.innerHTML = cellCount;
         row.appendChild(cell);
         rowCells.push(cellCount);
       }
@@ -269,7 +273,12 @@ class Pathfinder {
     for (let cell of visited) {
       cell.classList.remove(classNames.state.visited);
     }
-    // thisPathfinder.visited = [];
+
+    // remove path
+    const path = thisPathfinder.dom.board.querySelectorAll(select.board.path);
+    for (let cell of path) {
+      cell.classList.remove(classNames.board.path);
+    }
 
     // reset start pos
     if (thisPathfinder.dom.startPos) {
@@ -299,7 +308,12 @@ class Pathfinder {
     for (let cell of visited) {
       cell.classList.remove(classNames.state.visited);
     }
-    // thisPathfinder.visited = [];
+
+    // remove path
+    const path = thisPathfinder.dom.board.querySelectorAll(select.board.path);
+    for (let cell of path) {
+      cell.classList.remove(classNames.board.path);
+    }
 
     // reset timer
     thisPathfinder.dom.timerCounter.innerHTML = '0 sec';
@@ -396,12 +410,6 @@ class Pathfinder {
 
   }
 
-  setMidPoint() {
-    // const thisPathfinder = this;
-
-    console.log('setMidPoint');
-  }
-
   drawWalls() {
     const thisPathfinder = this;
 
@@ -442,6 +450,7 @@ class Pathfinder {
     });
   }
 
+
   // --------- ALGORITHMS --------- //
 
   runPathAlgorithm(name) {
@@ -470,6 +479,7 @@ class Pathfinder {
     else if (name === 'dijkstra') {
       dijkstra(params);
     }
+
 
   }
 

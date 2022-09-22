@@ -36,6 +36,10 @@
             animation: makeWall 0.3s;
           }
 
+          .cell.visited.path::after {
+            background: yellow;
+          }
+
           @keyframes makeWall {
             0% {
               transform: scale(0.1);

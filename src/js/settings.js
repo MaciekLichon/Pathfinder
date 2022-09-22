@@ -21,12 +21,16 @@ export const select = {
     drawingActions: '.board-settings',
     header: '.header',
     timer: '.timer',
+    modal: '.modal',
   },
   timer: {
     counter: '.counter',
     dropdown: '.dropdown-content',
     resetButton: '.reset-scores',
     score: '.score'
+  },
+  modal: {
+    closeButton: '.close-button',
   },
   header: {
     clearBoard: '[action=clear]',
@@ -38,6 +42,7 @@ export const select = {
     visited: '.visited',
     row: '.row',
     wall: '.wall',
+    path: '.path',
   },
   action: {
     algorithm: '.algorithm-selector',
@@ -67,9 +72,13 @@ export const classNames = {
     wall: 'wall',
     startPos: 'start-pos',
     finishPos: 'finish-pos',
+    path: 'path',
   },
   actions: {
     setting: 'setting',
+  },
+  modal: {
+    displayed: 'displayed',
   },
   state: {
     active: 'active',

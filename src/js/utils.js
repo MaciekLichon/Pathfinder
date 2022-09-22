@@ -12,3 +12,28 @@ utils.checkActiveButtons = function(arr, btn) {
     }
   }
 };
+
+
+
+utils.drawPath = function(path) {
+
+  setTimeout(function() {
+    let index = 0;
+
+    const interval = setInterval(function() {
+
+      if (path[index]) {
+        const cell = document.querySelector(`[num="${path[index]}"]`);
+        cell.classList.add(classNames.board.path);
+        index += 1;
+      }
+      else {
+        clearInterval(interval);
+        console.log('done');
+        return;
+      }
+
+    }, 20);
+  }, 700);
+
+};

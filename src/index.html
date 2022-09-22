@@ -24,7 +24,7 @@
                 <li><a href="" class="algorithm-selector" data-algorithm="breadthFirst">Breadth first</a></li>
                 <li><a href="" class="algorithm-selector" data-algorithm="depthFirst">Depth first</a></li>
                 <li><a href="" class="algorithm-selector" data-algorithm="dijkstra">Dijkstra's</a></li>
-                <li><a href="" class="algorithm-selector" data-algorithm="randomWalk">Random walk</a></li>
+                <!-- <li><a href="" class="algorithm-selector" data-algorithm="randomWalk">Random walk</a></li> -->
               </ul>
             </div>
             <a href="" class="nav-elem" action="maze">Add maze</a>
@@ -60,11 +60,7 @@
             <div class="board-settings">
               <div class="setting start" action="setStart">
                 <i class="fas fa-map-marker-alt setting-icon"></i>
-                <p class="setting-info">Select start position</p>
-              </div>
-              <div class="setting mid-destination" action="setMidPoint">
-                <i class="fas fa-map-pin setting-icon"></i>
-                <p class="setting-info above">Add another position mid-way</p>
+                <p class="setting-info above">Select start position</p>
               </div>
               <div class="setting finish" action="setFinish">
                 <i class="fas fa-flag-checkered setting-icon"></i>
@@ -102,6 +98,29 @@
           </div>
         </div>
       </div>
+
+      <section class="modals">
+
+        <div class="modal visualize-modal">
+          <div class="modal-window">
+            <div class="content">
+              <div class="icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="text">
+                <div class="header">
+                  <h2>Ooops!</h2>
+                </div>
+                <div class="info">
+                  <p>Pick an algorithm to visualize first</p>
+                </div>
+              </div>
+            </div>
+            <a href="" class="close-button">close</a>
+          </div>
+        </div>
+
+      </section>
 
     </div>
 
