@@ -1,4 +1,4 @@
-import { select, classNames } from '../settings.js';
+import { select, classNames, templates } from '../settings.js';
 
 class Modal {
   constructor() {
@@ -16,10 +16,15 @@ class Modal {
     thisModal.dom.modal = document.querySelector(select.containerOf.modal);
 
     thisModal.closeButton = thisModal.dom.modal.querySelector(select.modal.closeButton);
+    thisModal.message = thisModal.dom.modal.querySelector(select.modal.message);
   }
 
-  showModal() {
+  showModal(text) {
     const thisModal = this;
+
+    const messageHTML = templates.modalMessage({ message: text });
+    thisModal.message.innerHTML = messageHTML;
+    console.log('showmodal', thisModal.message);
 
     thisModal.dom.modal.classList.add(classNames.modal.displayed);
   }

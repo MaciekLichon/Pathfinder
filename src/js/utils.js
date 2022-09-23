@@ -13,8 +13,6 @@ utils.checkActiveButtons = function(arr, btn) {
   }
 };
 
-
-
 utils.drawPath = function(path) {
 
   setTimeout(function() {
@@ -36,4 +34,25 @@ utils.drawPath = function(path) {
     }, 20);
   }, 700);
 
+};
+
+utils.checkIfAdjacent = function(start, finish, rows, columns) {
+
+  const startCell = parseInt(start.getAttribute('num'));
+  const finishCell = parseInt(finish.getAttribute('num'));
+
+  const isRight = startCell === finishCell + 1;
+  const isLeft = startCell === finishCell - 1;
+  const isTop = startCell === finishCell - columns;
+  const isBottom = startCell === finishCell + columns;
+  const isTopLeft = startCell === finishCell - columns - 1;
+  const isTopRight = startCell === finishCell - columns + 1;
+  const isBottomLeft = startCell === finishCell + columns - 1;
+  const isBottomRight = startCell === finishCell + columns + 1;
+
+  if (isRight || isLeft || isTop || isBottom || isTopLeft || isTopRight || isBottomLeft || isBottomRight) {
+    return true;
+  } else {
+    return false;
+  }
 };

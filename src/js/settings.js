@@ -1,3 +1,7 @@
+export const templates = {
+  modalMessage: Handlebars.compile(document.querySelector('#template-modal-message').innerHTML),
+};
+
 export const settings = {
   board: {
     defaultRows: 20,
@@ -31,6 +35,7 @@ export const select = {
   },
   modal: {
     closeButton: '.close-button',
+    message: '.modal .info',
   },
   header: {
     clearBoard: '[action=clear]',

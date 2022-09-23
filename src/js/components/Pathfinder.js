@@ -179,10 +179,28 @@ class Pathfinder {
 
     thisPathfinder.dom.visualizeButton.addEventListener('click', function(event) {
       event.preventDefault();
+
+      const messages = {
+        noAlgorithm: 'Pick an algorithm to visualize first',
+        posCovered: 'Select correct start and end position',
+        posTooClose: 'There should be at least one cell gap between start and end position'
+      };
+
+      const isStartPosCovered = thisPathfinder.dom.startPos.classList.contains(classNames.board.wall);
+      const isFinishPosCovered = thisPathfinder.dom.finishPos.classList.contains(classNames.board.wall);
+      const isAdjacent = utils.checkIfAdjacent(thisPathfinder.dom.startPos, thisPathfinder.dom.finishPos, thisPathfinder.rows, thisPathfinder.columns);
+
       if (thisPathfinder.selectedAlgorithm) {
-        thisPathfinder.runPathAlgorithm(thisPathfinder.selectedAlgorithm);
+        if (isStartPosCovered || isFinishPosCovered) {
+          thisPathfinder.modal.showModal(messages.posCovered);
+        } else if (isAdjacent) {
+          thisPathfinder.modal.showModal(messages.posTooClose);
+        } else {
+          thisPathfinder.clearBoardForNewAlgorithm();
+          thisPathfinder.runPathAlgorithm(thisPathfinder.selectedAlgorithm);
+        }
       } else {
-        thisPathfinder.modal.showModal();
+        thisPathfinder.modal.showModal(messages.noAlgorithm);
       }
     });
 
