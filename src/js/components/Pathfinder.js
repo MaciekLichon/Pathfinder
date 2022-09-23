@@ -7,7 +7,6 @@ import Modal from './Modal.js';
 import { depthFirst } from '../algorithms/depthFirst.js';
 import { breadthFirst } from '../algorithms/breadthFirst.js';
 import { aStar } from '../algorithms/aStar.js';
-import { randomWalk } from '../algorithms/randomWalk.js';
 import { dijkstra } from '../algorithms/dijkstra.js';
 import { drawMaze } from '../algorithms/maze.js';
 
@@ -490,9 +489,6 @@ class Pathfinder {
     }
     else if (name === 'aStar') {
       aStar(params);
-    }
-    else if (name === 'randomWalk') {
-      randomWalk(params);
     }
     else if (name === 'dijkstra') {
       dijkstra(params);

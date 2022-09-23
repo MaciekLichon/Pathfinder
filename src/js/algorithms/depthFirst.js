@@ -12,6 +12,14 @@ export const depthFirst = function({ startPosCell, finishPosCell, board, timerWi
 
   const interval = setInterval(function() {
 
+    // check if there's still somewhere to go
+    if (stack.length === 0) {
+      clearInterval(interval);
+      timerWidget.stopTimer(selectedAlgorithmName, false);
+      console.log('no path');
+      return;
+    }
+
     const currentCell = stack.pop();
     // console.log('current', currentCell);
     alreadyVisitedCells.push(currentCell);
@@ -19,7 +27,7 @@ export const depthFirst = function({ startPosCell, finishPosCell, board, timerWi
 
     if (currentCell === finishPosCell) {
       clearInterval(interval);
-      timerWidget.stopTimer(selectedAlgorithmName);
+      timerWidget.stopTimer(selectedAlgorithmName, true);
       // console.log('match');
     }
 

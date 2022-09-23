@@ -29,16 +29,18 @@ class Timer {
     }, 1000);
   }
 
-  stopTimer(currentAlgorithm) {
+  stopTimer(currentAlgorithm, pathFound) {
     const thisTimer = this;
 
-    const currentTime = thisTimer.dom.timerCounter.innerHTML;
+    if (pathFound) {
+      const currentTime = thisTimer.dom.timerCounter.innerHTML;
 
-    const newTime = document.createElement('li');
-    newTime.classList.add(classNames.timer.score);
-    newTime.innerHTML = `${currentAlgorithm}: ${currentTime}`;
+      const newTime = document.createElement('li');
+      newTime.classList.add(classNames.timer.score);
+      newTime.innerHTML = `${currentAlgorithm}: ${currentTime}`;
 
-    thisTimer.dom.timerDropdown.appendChild(newTime);
+      thisTimer.dom.timerDropdown.appendChild(newTime);
+    }
 
     clearInterval(thisTimer.timerInterval);
   }

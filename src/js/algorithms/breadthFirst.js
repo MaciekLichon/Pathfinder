@@ -11,12 +11,20 @@ export const breadthFirst = function({ startPosCell, finishPosCell, board, timer
 
   const interval = setInterval(function() {
 
+    // check if there's still somewhere to go
+    if (queue.length === 0) {
+      clearInterval(interval);
+      timerWidget.stopTimer(selectedAlgorithmName, false);
+      console.log('no path');
+      return;
+    }
+
     const currentCell = queue.shift();
     alreadyVisitedCells.push(currentCell);
 
     if (currentCell === finishPosCell) {
       clearInterval(interval);
-      timerWidget.stopTimer(selectedAlgorithmName);
+      timerWidget.stopTimer(selectedAlgorithmName, true);
       // console.log('match');
     }
 

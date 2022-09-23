@@ -33,6 +33,17 @@ export const aStar = function({ startPosCell, finishPosCell, board, timerWidget,
   // while (openSet.length > 0) {
   const interval = setInterval(function() {
 
+    // Stage 0 START: check if there's still somewhere to go
+
+    if (openSet.length === 0) {
+      clearInterval(interval);
+      timerWidget.stopTimer(selectedAlgorithmName, false);
+      console.log('no path');
+      return;
+    }
+
+    // Stage 0 END
+
     // Stage 1 START: get the value with the lowest fScore from openSet array and assign to current
 
     let lowestFScoreIndex = 0; // set to 0 each time to make sure that all elements are checked in the if statement
@@ -44,6 +55,7 @@ export const aStar = function({ startPosCell, finishPosCell, board, timerWidget,
     }
 
     let current = openSet[lowestFScoreIndex];
+    console.log(openSet);
 
     if (current.cell != startPosCell && current.cell != finishPosCell) {
       const currentDOM = document.querySelector(`[num="${current.cell}"]`);
@@ -65,7 +77,7 @@ export const aStar = function({ startPosCell, finishPosCell, board, timerWidget,
       path = path.reverse();
       // console.log('path', path);
       clearInterval(interval);
-      timerWidget.stopTimer(selectedAlgorithmName);
+      timerWidget.stopTimer(selectedAlgorithmName, true);
       utils.drawPath(path);
       return;
     }

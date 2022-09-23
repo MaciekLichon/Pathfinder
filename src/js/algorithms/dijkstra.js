@@ -29,6 +29,14 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
 
     console.log('current', current);
 
+    // check if there's still somewhere to go
+    if (unvisited.length === 0) {
+      clearInterval(interval);
+      timerWidget.stopTimer(selectedAlgorithmName, false);
+      console.log('no path');
+      return;
+    }
+
     // animate by adding class
     if (current != startPosCell && current != finishPosCell) {
       const currentDOM = document.querySelector(`[num="${current}"]`);
@@ -38,7 +46,7 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
     // filter unvisited neighbours from all new neighbours of a given cell (current)
     let currentNeighbours = board[current].neighbours;
     let unvisitedNeighbours = currentNeighbours.filter(x => !visited.includes(x));
-    console.log('unvisited current neighbours', unvisitedNeighbours);
+    // console.log('unvisited current neighbours', unvisitedNeighbours);
 
     // calculate new distance for each unvisited neighbour and add them to the global unvisited list
     for (let neighbour of unvisitedNeighbours) {
@@ -58,7 +66,7 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
     // remove current from all unvisited
     const visitedToRemove = unvisited.indexOf(current);
     unvisited.splice(visitedToRemove, 1);
-    console.log('all unvisited cells', unvisited);
+    // console.log('all unvisited cells', unvisited);
 
     // select unvisited cell with the lowest distance from start
     // becuase it's not a weighted grid and new neighbours are pushed to the end of unvisted list, it's never going to change from index 0
@@ -66,9 +74,9 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
 
     for (let i = 0; i < unvisited.length; i++) {
       let neighbourData = board[unvisited[i]];
-      console.log('neighbourData', neighbourData);
+      // console.log('neighbourData', neighbourData);
       let lowestDistanceNeighbour = board[unvisited[lowestDistanceIndex]];
-      console.log('lowestDistanceNeighbour', lowestDistanceNeighbour);
+      // console.log('lowestDistanceNeighbour', lowestDistanceNeighbour);
 
       if (neighbourData.fromStart < lowestDistanceNeighbour.fromStart) {
         lowestDistanceIndex = i;
@@ -79,8 +87,8 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
 
     // update the visited list and change current to the neighbor closest to start
     visited.push(current);
-    console.log('visited', visited);
-    console.log('---------');
+    // console.log('visited', visited);
+    // console.log('---------');
     current = unvisited[lowestDistanceIndex];
 
     // check if done and generate path
@@ -93,7 +101,7 @@ export const dijkstra = function({ startPosCell, finishPosCell, board, timerWidg
       path = path.reverse();
       console.log('path', path);
       clearInterval(interval);
-      timerWidget.stopTimer(selectedAlgorithmName);
+      timerWidget.stopTimer(selectedAlgorithmName, true);
       utils.drawPath(path);
       return;
     }
