@@ -153,6 +153,7 @@ class Pathfinder {
       const clickedElement = event.target.parentNode;
 
       if (clickedElement.classList.contains(classNames.actions.setting)) {
+        thisPathfinder.clearBoardForNewAlgorithm();
         utils.checkActiveButtons(actionButtons, clickedElement);
         clickedElement.classList.toggle(classNames.state.active);
 
@@ -201,6 +202,7 @@ class Pathfinder {
       } else {
         thisPathfinder.modal.showModal(messages.noAlgorithm);
       }
+
     });
 
     thisPathfinder.dom.addMazeButton.addEventListener('click', function(event) {
@@ -470,7 +472,7 @@ class Pathfinder {
 
   // --------- ALGORITHMS --------- //
 
-  runPathAlgorithm(name) {
+  async runPathAlgorithm(name) {
     const thisPathfinder = this;
 
     const params = {
@@ -481,19 +483,22 @@ class Pathfinder {
       selectedAlgorithmName: thisPathfinder.selectedAlgorithmName,
     };
 
+    utils.disableClicking(true);
+
     if (name === 'depthFirst') {
-      depthFirst(params);
+      await depthFirst(params);
     }
     else if (name === 'breadthFirst') {
-      breadthFirst(params);
+      await breadthFirst(params);
     }
     else if (name === 'aStar') {
-      aStar(params);
+      await aStar(params);
     }
     else if (name === 'dijkstra') {
-      dijkstra(params);
+      await dijkstra(params);
     }
 
+    utils.disableClicking(false);
 
   }
 

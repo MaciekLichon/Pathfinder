@@ -71,6 +71,9 @@ export const select = {
 };
 
 export const classNames = {
+  general: {
+    clickDisabled: 'noClickAvailable',
+  },
   board: {
     row: 'row',
     cell: 'cell',
@@ -78,6 +81,7 @@ export const classNames = {
     startPos: 'start-pos',
     finishPos: 'finish-pos',
     path: 'path',
+    noPath: 'noPath',
   },
   actions: {
     setting: 'setting',

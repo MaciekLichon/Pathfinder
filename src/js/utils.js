@@ -36,6 +36,26 @@ utils.drawPath = function(path) {
 
 };
 
+utils.noPath = function(start, finish) {
+
+  setTimeout(function() {
+
+    const startCell = document.querySelector(`[num="${start}"]`);
+    const finishCell = document.querySelector(`[num="${finish}"]`);
+
+    const cellsToHighlight = [startCell, finishCell];
+
+    for (let cell of cellsToHighlight) {
+      cell.classList.add(classNames.board.noPath);
+
+      setTimeout(function() {
+        cell.classList.remove(classNames.board.noPath);
+      }, 1500);
+    }
+
+  }, 1000);
+};
+
 utils.checkIfAdjacent = function(start, finish, rows, columns) {
 
   const startCell = parseInt(start.getAttribute('num'));
@@ -54,5 +74,13 @@ utils.checkIfAdjacent = function(start, finish, rows, columns) {
     return true;
   } else {
     return false;
+  }
+};
+
+utils.disableClicking = function(status) {
+  if (status) {
+    document.body.classList.add(classNames.general.clickDisabled);
+  } else {
+    document.body.classList.remove(classNames.general.clickDisabled);
   }
 };

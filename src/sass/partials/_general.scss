@@ -38,6 +38,10 @@ body {
   transition: 0.5s;
 }
 
+.noClickAvailable {
+  pointer-events: none;
+}
+
 .container {
   width: 90vw;
   max-width: 1500px;
