@@ -220,14 +220,6 @@ class Pathfinder {
       event.preventDefault();
       thisPathfinder.clearBoard();
       drawMaze(thisPathfinder.rows, thisPathfinder.columns);
-
-      // change finish pos to allow quick start and prevent walls from appearing on top of finish pos cell
-      const newFinishPos = (thisPathfinder.rows * thisPathfinder.columns).toString();
-      const newFinishPosCell = thisPathfinder.dom.board.querySelector(`[num="${newFinishPos}"]`);
-
-      thisPathfinder.dom.finishPos.classList.remove(classNames.board.finishPos); // remove class from current finish pos
-      newFinishPosCell.classList.add(classNames.board.finishPos); // add class to new finish pos
-      thisPathfinder.dom.finishPos = newFinishPosCell; // assign new cell to variable
     });
   }
 
@@ -241,6 +233,16 @@ class Pathfinder {
     thisPathfinder.dom.board.onmousedown = function() {
       console.log('down');
       thisPathfinder.holdingMouse = true;
+
+      // the below is to handle the case when the user runs an algorithm with an action button active
+      // and uses the same action (without switching to another action button) with the visited cells highlighted on board (because of running the algorithm recently)
+      // in short, if any path cell exists, the board is cleared when a valid action is triggered on board
+      const randomVisitedCell = document.querySelector(select.board.visited);
+      console.log(randomVisitedCell);
+      if (thisPathfinder.currentAction != 'noAction' && randomVisitedCell) {
+        thisPathfinder.clearBoardForNewAlgorithm();
+        console.log('mouse trigger');
+      }
     };
 
     thisPathfinder.dom.board.onmouseup = function() {
@@ -362,11 +364,8 @@ class Pathfinder {
   initStage(name) {
     const thisPathfinder = this;
 
-    console.log(name);
     if (name === 'setStart') {
       thisPathfinder.setStart();
-    } else if (name === 'setMidPoint') {
-      thisPathfinder.setMidPoint();
     } else if (name === 'setFinish') {
       thisPathfinder.setFinish();
     } else if (name === 'drawWalls') {
@@ -418,8 +417,8 @@ class Pathfinder {
   setFinish() {
     const thisPathfinder = this;
 
-    const defaultRow = settings.finishPos.defaultRow;
-    const defaultColumn = settings.finishPos.defaultColumn;
+    const defaultRow = thisPathfinder.rows;
+    const defaultColumn = 1;
     const defaultFinishCell = thisPathfinder.dom.board.querySelector(`[row="${defaultRow}"][column="${defaultColumn}"]`);
 
     if (!thisPathfinder.dom.finishPos) {
