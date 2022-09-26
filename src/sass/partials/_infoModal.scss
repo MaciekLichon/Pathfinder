@@ -1,5 +1,5 @@
 
-.modal {
+.infoModal {
   position: fixed;
   top: 0;
   left: 0;
@@ -70,6 +70,6 @@
 
 }
 
-.modal.displayed {
+.infoModal.displayed {
   display: block;
 }

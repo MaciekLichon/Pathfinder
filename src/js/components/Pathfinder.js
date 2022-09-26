@@ -149,10 +149,17 @@ class Pathfinder {
 
     const actionButtons = thisPathfinder.dom.drawingActions.children;
 
+    // run the default action
+    const defaultAction = thisPathfinder.dom.drawingActions.querySelector(select.action.active);
+    const defaultActionName = defaultAction.getAttribute('action');
+    thisPathfinder.currentAction = defaultActionName;
+    thisPathfinder.initStage(thisPathfinder.currentAction);
+
+    // listeners
     thisPathfinder.dom.actionsBar.addEventListener('click', function(event) {
       const clickedElement = event.target.parentNode;
 
-      if (clickedElement.classList.contains(classNames.actions.setting)) {
+      if (clickedElement.classList.contains(classNames.actions.setting) && !clickedElement.classList.contains(classNames.actions.help)) {
         thisPathfinder.clearBoardForNewAlgorithm();
         utils.checkActiveButtons(actionButtons, clickedElement);
         clickedElement.classList.toggle(classNames.state.active);
@@ -165,6 +172,10 @@ class Pathfinder {
         }
 
         thisPathfinder.initStage(thisPathfinder.currentAction);
+      }
+      // handle help button differently so it doesn't impact board or other action buttons
+      else if (clickedElement.classList.contains(classNames.actions.setting) && clickedElement.classList.contains(classNames.actions.help)) {
+        thisPathfinder.initStage('help');
       }
     });
   }
@@ -192,15 +203,15 @@ class Pathfinder {
 
       if (thisPathfinder.selectedAlgorithm) {
         if (isStartPosCovered || isFinishPosCovered) {
-          thisPathfinder.modal.showModal(messages.posCovered);
+          thisPathfinder.modal.showInfoModal(messages.posCovered);
         } else if (isAdjacent) {
-          thisPathfinder.modal.showModal(messages.posTooClose);
+          thisPathfinder.modal.showInfoModal(messages.posTooClose);
         } else {
           thisPathfinder.clearBoardForNewAlgorithm();
           thisPathfinder.runPathAlgorithm(thisPathfinder.selectedAlgorithm);
         }
       } else {
-        thisPathfinder.modal.showModal(messages.noAlgorithm);
+        thisPathfinder.modal.showInfoModal(messages.noAlgorithm);
       }
 
     });
@@ -209,6 +220,14 @@ class Pathfinder {
       event.preventDefault();
       thisPathfinder.clearBoard();
       drawMaze(thisPathfinder.rows, thisPathfinder.columns);
+
+      // change finish pos to allow quick start and prevent walls from appearing on top of finish pos cell
+      const newFinishPos = (thisPathfinder.rows * thisPathfinder.columns).toString();
+      const newFinishPosCell = thisPathfinder.dom.board.querySelector(`[num="${newFinishPos}"]`);
+
+      thisPathfinder.dom.finishPos.classList.remove(classNames.board.finishPos); // remove class from current finish pos
+      newFinishPosCell.classList.add(classNames.board.finishPos); // add class to new finish pos
+      thisPathfinder.dom.finishPos = newFinishPosCell; // assign new cell to variable
     });
   }
 
@@ -343,6 +362,7 @@ class Pathfinder {
   initStage(name) {
     const thisPathfinder = this;
 
+    console.log(name);
     if (name === 'setStart') {
       thisPathfinder.setStart();
     } else if (name === 'setMidPoint') {
@@ -353,6 +373,8 @@ class Pathfinder {
       thisPathfinder.drawWalls();
     } else if (name === 'ereaseWalls') {
       thisPathfinder.ereaseWalls();
+    } else if (name === 'help') {
+      thisPathfinder.modal.showGuide();
     }
   }
 

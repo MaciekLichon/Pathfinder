@@ -25,7 +25,8 @@ export const select = {
     drawingActions: '.board-settings',
     header: '.header',
     timer: '.timer',
-    modal: '.modal',
+    infoModal: '.infoModal',
+    guideModal: '.guide',
   },
   timer: {
     counter: '.counter',
@@ -33,9 +34,12 @@ export const select = {
     resetButton: '.reset-scores',
     score: '.score'
   },
-  modal: {
+  infoModal: {
     closeButton: '.close-button',
-    message: '.modal .info',
+    message: '.infoModal .info',
+  },
+  guideModal: {
+    closeButton: '.carousel-exit',
   },
   header: {
     clearBoard: '[action=clear]',
@@ -58,6 +62,7 @@ export const select = {
     midPos: '.setting.mid-destination',
     endPos: '.setting.finish',
     ereaser: '.setting.ereaser',
+    active: '.setting.active',
   },
   node: {
     start: '.start-pos',
@@ -85,6 +90,7 @@ export const classNames = {
   },
   actions: {
     setting: 'setting',
+    help: 'help',
   },
   modal: {
     displayed: 'displayed',
