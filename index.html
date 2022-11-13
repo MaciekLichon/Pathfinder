@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathfinder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+
+    <div class="container">
+
+      <header class="header">
+        <div class="nav">
+          <div class="nav-options">
+            <div class="dropdown-button nav-elem">
+              <span>Algorithms</span>
+              <ul class="dropdown-content">
+                <li><a href="" class="algorithm-selector" data-algorithm="aStar">A star</a></li>
+                <li><a href="" class="algorithm-selector" data-algorithm="breadthFirst">Breadth first</a></li>
+                <li><a href="" class="algorithm-selector" data-algorithm="depthFirst">Depth first</a></li>
+                <li><a href="" class="algorithm-selector" data-algorithm="dijkstra">Dijkstra's</a></li>
+                <!-- <li><a href="" class="algorithm-selector" data-algorithm="randomWalk">Random walk</a></li> -->
+              </ul>
+            </div>
+            <a href="" class="nav-elem" action="maze">Add maze</a>
+            <a href="" class="nav-elem" action="clear">Clear board</a>
+            <a href="" class="nav-elem" action="visualize">Visualize</a>
+          </div>
+          <div class="logo">
+            <p class="title">Pathfinder</p>
+            <i class="fas fa-location-arrow"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="visualizer-container">
+        <div class="visualizer">
+          <div class="settings-container">
+            <div class="setting setup">
+              <div class="dropdown-button">
+                <i class="fas fa-cog setting-icon"></i>
+                <ul class="dropdown-content">
+                  <li class="dropdown-title"><p>Board size</p></li>
+                  <li><a href="" class="board-size-selector" data-rows="30" data-columns="50">Big</a></li>
+                  <li><a href="" class="board-size-selector sizeSelected" data-rows="20" data-columns="35">Medium</a></li>
+                  <li><a href="" class="board-size-selector" data-rows="10" data-columns="10">Small</a></li>
+                  <li class="dropdown-title"><p>Color theme</p></li>
+                  <li><a href="" class="theme-selector themeSelected" data-theme="teal" body-color="#abd5c0">Teal</a></li>
+                  <li><a href="" class="theme-selector" data-theme="tan" body-color="#dfcd9f">Tan</a></li>
+                  <li><a href="" class="theme-selector" data-theme="lavender" body-color="#bcbcf2">Lavender</a></li>
+                </ul>
+                <p class="setting-info dropdown-button">Board settings</p>
+              </div>
+            </div>
+            <div class="board-settings">
+              <div class="setting start active" action="setStart">
+                <i class="fas fa-map-marker-alt setting-icon"></i>
+                <p class="setting-info above">Select start position</p>
+              </div>
+              <div class="setting finish" action="setFinish">
+                <i class="fas fa-flag-checkered setting-icon"></i>
+                <p class="setting-info">Select end position</p>
+              </div>
+              <div class="setting walls" action="drawWalls">
+                <i class="fas fa-cubes setting-icon"></i>
+                <p class="setting-info above">Add walls</p>
+              </div>
+              <div class="setting ereaser" action="ereaseWalls">
+                <i class="fas fa-eraser setting-icon"></i>
+                <p class="setting-info">Erase walls</p>
+              </div>
+            </div>
+            <div class="setting help" action="help">
+              <i class="fas fa-info-circle setting-icon"></i>
+              <p class="setting-info">Help</p>
+            </div>
+          </div>
+          <div class="board-container">
+            <div class="timer dropdown-button">
+              <div class="counter">
+                0 sec
+              </div>
+              <ul class="dropdown-content">
+                <li><a href="" class="reset-scores">Reset scores</a></li>
+              </ul>
+              <div class="hover-icon">
+                <i class="fas fa-angle-double-down"></i>
+              </div>
+            </div>
+            <div class="board teal">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="modals">
+        <div class="infoModal">
+          <div class="modal-window">
+            <div class="content">
+              <div class="icon">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="text">
+                <div class="header">
+                  <h2>Ooops!</h2>
+                </div>
+                <div class="info">
+
+                </div>
+              </div>
+            </div>
+            <a href="" class="close-button">close</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="guide displayed">
+        <div class="guide-content">
+
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <div class="carousel-item-image">
+                  <img src="/images/guide/slide_1.png" class="w-100" alt="...">
+                </div>
+                <div class="carousel-item-text">
+                  <div class="carousel-item-header">
+                    <h2>Hello!</h2>
+                  </div>
+                  <div class="carousel-item-description">
+                    <p>Welcome to Pathfinder.</p>
+                    <p>I encourage you to familiarize yourself with this short guide to get to know all features of this app.</p>
+                    <p>You can skip it at any time by using the <i class="fas fa-times-circle"></i> button below or by clicking anywhere outside of this window.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-item-image">
+                  <img src="/images/guide/slide_2.png" class="w-100" alt="...">
+                </div>
+                <div class="carousel-item-text">
+                  <div class="carousel-item-header">
+                    <h2>Quick start</h2>
+                  </div>
+                  <div class="carousel-item-description">
+                    <p>You can get your first path in only 3 clicks!</p>
+                    <ol>
+                      <li>Pick the algorithm</li>
+                      <li>Add maze</li>
+                      <li>Visualize</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-item-image">
+                  <img src="/images/guide/slide_3.png" class="w-100" alt="...">
+                </div>
+                <div class="carousel-item-text">
+                  <div class="carousel-item-header">
+                    <h2>Draw by yourself</h2>
+                  </div>
+                  <div class="carousel-item-description">
+                    <p>Use the following tools to create a unique setup. <br>
+                      Click and drag on the board to make your own changes
+                    </p>
+                    <ul>
+                      <li><i class="fas fa-map-marker-alt"></i>- select start position</li>
+                      <li><i class="fas fa-flag-checkered"></i>- select end position</li>
+                      <li><i class="fas fa-cubes"></i>- add walls</li>
+                      <li><i class="fas fa-eraser"></i>- erase walls</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-item-image">
+                  <img src="/images/guide/slide_4.png" class="w-100" alt="...">
+                </div>
+                <div class="carousel-item-text">
+                  <div class="carousel-item-header">
+                    <h2>Additional tools and settings</h2>
+                  </div>
+                  <div class="carousel-item-description">
+                    <p>Choose from 3 board sizes and 3 color themes available in the dropdown menu <i class="fas fa-cog setting-icon"></i> on the left side.</p>
+                    <p>There's also a timer available to allow tracking and comparing algorithms' efficiency.</p>
+                    <p>Finally, you can access this guide again by clicking on the <i class="fas fa-info-circle"></i> button.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-circle-left"></i></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-chevron-circle-right"></i></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            <button class="carousel-exit" type="button">
+              <span class="carousel-control-exit-icon"><i class="fas fa-times-circle"></i></span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <script id="template-modal-message" type="text/x-handlebars-template">
+      <p>{{ message }}</p>
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
+    <script src="js/app.js" type="module"></script>
+  </body>
+</html>
