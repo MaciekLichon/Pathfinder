@@ -1,0 +1,6 @@
+// images paths are stored outside of 'partials' folder to match the 'dist/css' folder structure after building
+
+$marker-start-black: url('../images/icons/map-marker-alt-solid.svg');
+$marker-start-red: url('../images/icons/map-marker-alt-solid-red.svg');
+$marker-finish-black: url('../images/icons/flag-checkered-solid.svg');
+$marker-finish-red: url('../images/icons/flag-checkered-solid-red.svg');

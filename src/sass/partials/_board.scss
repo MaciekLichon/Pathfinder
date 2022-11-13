@@ -1,3 +1,4 @@
+@import '../images';
 
 .visualizer-container {
   .visualizer {
@@ -68,30 +69,50 @@
           }
 
           .start-pos {
-            background-image: url('../../images/icons/map-marker-alt-solid.svg');
+            // background-image: url('../../images/icons/map-marker-alt-solid.svg');
+            background-image: $marker-start-black;
             background-repeat: no-repeat;
             background-position: center;
             cursor: pointer;
           }
 
           .finish-pos {
-            background-image: url('../../images/icons/flag-checkered-solid.svg');
+            // background-image: url('../../images/icons/flag-checkered-solid.svg');
+            background-image: $marker-finish-black;
             background-repeat: no-repeat;
             background-position: center;
             cursor: pointer;
           }
 
-          .start-pos.noPath, .finish-pos.noPath {
-            animation: blink 1500ms;
+          .start-pos.noPath {
+            animation: blinkStartPos 1500ms;
           }
 
-          @keyframes blink {
+          .finish-pos.noPath {
+            animation: blinkFinishPos 1500ms;
+          }
+
+          @keyframes blinkStartPos {
             16%, 48%, 80% {
-              filter: invert(35%) sepia(86%) saturate(6459%) hue-rotate(2deg) brightness(102%) contrast(103%);
+              // background-image: url('../../images/icons/map-marker-alt-solid-red.svg');
+              background-image: $marker-start-red;
             }
 
-            0%, 32%, 64%, 100%{
-              filter: none;
+            32%, 64% {
+              // background-image: url('../../images/icons/map-marker-alt-solid.svg');
+              background-image: $marker-start-black;
+            }
+          }
+
+          @keyframes blinkFinishPos {
+            16%, 48%, 80% {
+              // background-image: url('../../images/icons/flag-checkered-solid-red.svg');
+              background-image: $marker-finish-red;
+            }
+
+            32%, 64% {
+              // background-image: url('../../images/icons/flag-checkered-solid.svg');
+              background-image: $marker-finish-black;
             }
           }
         }

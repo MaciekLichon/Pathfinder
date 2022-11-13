@@ -74,8 +74,8 @@ export const depthFirst = function({ startPosCell, finishPosCell, board, timerWi
       }
 
       for (let neighbour of board[currentCell].neighbours) {
-        if (!alreadyVisitedCells.includes(neighbour) && !stack.includes(neighbour)) {
-        // if (!alreadyVisitedCells.includes(neighbour)) { // do we add the same neighbor to the stack multiple times or not?
+        // if (!alreadyVisitedCells.includes(neighbour) && !stack.includes(neighbour)) {
+        if (!alreadyVisitedCells.includes(neighbour)) { // do we add the same neighbor to the stack multiple times or not?
           board[neighbour].parent = currentCell;
           stack.push(neighbour);
         }

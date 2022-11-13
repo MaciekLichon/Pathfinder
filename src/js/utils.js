@@ -9,6 +9,7 @@ utils.checkActiveButtons = function(arr, btn) {
   for (let item of arr) {
     if (item.classList.contains(classNames.state.active) && item != btn) {
       item.classList.remove(classNames.state.active);
+      console.log(item);
     }
   }
 };
@@ -53,7 +54,7 @@ utils.noPath = function(start, finish) {
       }, 1500);
     }
 
-  }, 1000);
+  }, 700);
 };
 
 utils.checkIfAdjacent = function(start, finish, rows, columns) {

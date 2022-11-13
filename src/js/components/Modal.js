@@ -46,7 +46,6 @@ class Modal {
     });
     thisModal.dom.guideCloseButton.addEventListener('click', function(event) {
       event.preventDefault();
-      console.log('asd');
       thisModal.dom.guideModal.classList.remove(classNames.modal.displayed);
     });
 

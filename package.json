@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.html",
+    "homepage": "https://macieklichon.github.io/Pathfinder/",
     "scripts": {
         "init-project": "npm install && npm-run-all init:*",
         "init:dirs": "mkdirp dist src/sass src/css src/vendor src/images src/js src/db",
@@ -25,7 +26,9 @@
         "watch": "npm-run-all build build-dev -p watch:* server",
         "watch:browsersync": "browser-sync start --server dist --files \"dist/**/*\"",
         "watch:sassprefixer": "onchange \"src/sass/**/*.scss\" -- npm run build-dev",
-        "watch:copy": "onchange -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" -- copyfiles -a -u 1 {{changed}} dist"
+        "watch:copy": "onchange -e \"**/sass/**/*\" -e \"**/.gitkeep\" \"src/**/*\" -- copyfiles -a -u 1 {{changed}} dist",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "keywords": [],
     "author": "",
@@ -47,6 +50,7 @@
         "stylelint-scss": "^3.5.4"
     },
     "dependencies": {
+        "gh-pages": "^4.0.0",
         "json-server": "^0.16.3",
         "sass": "^1.35.1"
     }
